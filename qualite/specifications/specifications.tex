@@ -1,52 +1,96 @@
-\documentclass[a4paper,12pt]{article}
-\usepackage[francais]{babel}
+\documentclass{scrreprt}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[top=2.7cm, bottom=2.7cm, left=2.7cm, right=2.7cm]{geometry}
-\usepackage{listings}
+\usepackage{lmodern}
+\usepackage[francais]{babel, varioref}
 \usepackage{graphicx}
+\usepackage{listings}
+%\usepackage[pdfborder={0 0 0},
+ %           pdfcreator={},
+   %         pdfsubject={Projet Correcteur orthographique},
+  %          pdftitle={Projet Correcteur orthographique}]{hyperref}
+\usepackage{xspace}
+\usepackage{amssymb}
+\usepackage{calc}
+\usepackage{listingsutf8}
 \usepackage{color}
+\usepackage{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%
+\usepackage{url}
+\usepackage[top=2.1cm,bottom=2.2cm,left=2cm,right=2cm]{geometry}
+\usepackage[final]{pdfpages}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%% Pour sommaire cliquable %%%%%%%%%%
+\usepackage{hyperref} % Créer des liens et des signets
+\hypersetup{
+colorlinks=true, %colorise les liens
+breaklinks=true, %permet le retour à la ligne dans les liens trop longs
+urlcolor= blue, %couleur des hyperliens
+linkcolor= black, %couleur des liens internes
+citecolor=black,  %couleur des références
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%opening
-\title{Projet d'Informatique Répartie - Tournois - Spécifications}
-\author{Alexandre Brehmer, Christophe Cluizel, Anthony Courtin,\\Céline Leduc, Charlotte Touchard, Simon Wallon}
+\newcommand\TODO[1]{\textcolor{red}{\textbf{#1}}}
 
+%pour la coloration du code
+
+\definecolor{colFond}{rgb}{0.8,0.9,0.9}
+\definecolor{hellgelb}{rgb}{1,1,0.8}
+\definecolor{colKeys}{rgb}{0,0,1}
+\definecolor{colIdentifier}{rgb}{0,0,0}
+\definecolor{colComments}{rgb}{0,0.5,0}
+\definecolor{colString}{rgb}{0.62,0.12,0.94}
+
+\lstset{
+  language=Java,
+  float=hbp,
+  basicstyle=\ttfamily\small,
+  identifierstyle=\color{colIdentifier},
+  keywordstyle=\bf \color{colKeys},
+  stringstyle=\color{colString},
+  commentstyle=\color{colComments},
+  columns=flexible,
+  tabsize=3,
+  frame=single,
+  frame=shadowbox,
+  rulesepcolor=\color[gray]{0.5},
+  extendedchars=true,
+  showspaces=false,
+  showstringspaces=false,
+  numbers=left,
+  firstnumber=1,
+  numberstyle=\tiny,
+  breaklines=true,
+  backgroundcolor=\color{hellgelb},
+  captionpos=b,
+}
+
+\usepackage{templateINSA}
+\initINSA
+
+\title{Javabyrinthe}
+
+\author{Alexandre \bsc{Brehmer}\\ Christophe \bsc{Cluizel} \\ Anthony \bsc{Courtin} \\ Céline \bsc{Leduc} \\ Charlotte \bsc{Touchard} \\ Simon \bsc{Wallon}}
+\renewcommand\soustitre{Rapport de Spécifications}
+\renewcommand\infoBig{Projet d'Informatique Répartie}
+\renewcommand\infoSmall{}
 
 \begin{document}
+ \titleINSA{15}{images/page_couverture.png}{0}{0}{225}{\url{http://fvirtman.free.fr/progs/makelaby.png}{\textcolor{white}{makezine.com}}}
 
-\maketitle
+\tableofcontents
 
-\section{Principe général}
-Il s'agit de développer un service de tournois de labyrinthes réparti. Les joueurs sont placés au centre d'un labyrinthe et doivent en sortir. La partie est terminée lorsque qu'un joueur y parvient. Il est alors déclaré vainqueur.
+\input{1.introduction.tex}
 
-\section{Interface utilisateur}
-Le joueur a deux possibilités :
-\begin{itemize}
-	\item il dispose d'une zone de texte afin de coder sa propre intelligence artificielle
-	\item il joue manuellement avec les touches du clavier
-\end{itemize}
+\input{2.ihm.tex}
 
-\section{Gestion des parties}
-L'utilisateur peut choisir de créer une partie. Dans ce cas il spécifie le nombre de joueurs maximum. Il peut également choisir de rejoindre une partie en attente.
+\input{3.communication_client_serveur.tex}
 
-Une partie en attente est une partie créée qui n'a pas été lancée par son créateur.
-
-Un fois la partie lancée, elle n'est plus dans la liste des parties en attente et ne peut plus être rejointe.
-
-Rappel : dès qu'un joueur atteint la sortie du labyrinthe il est déclaré vainqueur. La partie est alors terminée.
-
-\section{Déplacements}
-L'intelligence artificielle ou le joueur doivent soumettre au programme une des quatre directions suivantes : HAUT, BAS, GAUCHE, DROITE.
-
-Si le temps de réponse du joueur dépasse 1 seconde alors le déplacement n'est pas pris en compte et le joueur reste immobile.
-
-Idem si le déplacement mène le joueur dans un mur.
-
-\section{Serveur}
-Plusieurs parties se déroulent en simultané.
-
-Lorsqu'un joueur rejoint une partie en attente, celle-ci est choisie aléatoirement parmi celles ayant des places disponibles.
+\input{4.gestion_serveur.tex}
 
 
 \end{document}

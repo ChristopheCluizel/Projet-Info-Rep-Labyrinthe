@@ -1,16 +1,10 @@
-SRC=$(wildcard *.tex)
-OBJ=$(SRC:.tex=.pdf)
-
 all: compile clean
 
-compile: $(OBJ)
-
-%.pdf: %.tex
-	pdflatex $^
+compile:
+	pdflatex specifications.tex
 
 clean:
-	rm -rf *.aux *.log
+	rm -rf *.aux *.log *.toc *.out
 
-mrproper:
-	make clean
+mrproper: clean
 	rm -rf *.pdf
