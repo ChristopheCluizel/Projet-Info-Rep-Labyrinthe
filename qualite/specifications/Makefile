@@ -1,7 +1,7 @@
 all: compile clean
 
 compile:
-	pdflatex specifications.tex
+	rubber -d specifications.tex
 
 clean:
 	rm -rf *.aux *.log *.toc *.out
