@@ -2,5 +2,13 @@
 \chapter{Gestion du serveur}
 
 \TODO{Alexandre}
+\section {Objectif}
+Le serveur a pour but d'interconnecter les clients afin qu'ils puissent jouer ensemble. C'est également lui qui fait la vérification des mouvements de chaque client afin d'éviter toutes triches ou incohérences.
+\section{Fonctionnement}
+Lorsqu'un utilisateur décide de créer une partie, il envoie une requête au serveur qui se charge de la créer . Le client ayant initié cette demande est automatiquement connecté à la partie.
+Le jeu ne démarre que si le nombre de joueur cible est atteint dans la partie.
+Si un client veut jouer sans créer de partie, le serveur le connecte à la première partie disponible.\\
+Au démarrage d'une partie, le serveur choisit au hasard une carte sur laquelle les clients vont jouer et la leur transmet. Une fois que tous les clients ont validé la réception de la carte, le jeu commence. Chaque participant possède un temps limite pour jouer en fonction de sa nature (IA ou Humain). Si un joueur ne joue pas dans le temps imparti, sont tour en passé et le joueur suivant peu jouer.\\
+À chaque tour, le serveur envoie une demande au joueur qui doit jouer. Le client indique alors la direction dans laquelle il souhaite se déplacer. Si le mouvement est validé par le serveur, la nouvelle position est envoyée à tous les participants de la partie.
 
 % comment le serveur gère le bazar et à quoi il sert…
