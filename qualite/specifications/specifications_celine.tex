@@ -1,0 +1,52 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[francais]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=2.7cm, bottom=2.7cm, left=2.7cm, right=2.7cm]{geometry}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{color}
+
+
+%opening
+\title{Projet d'Informatique Répartie - Tournois - Spécifications}
+\author{Alexandre Brehmer, Christophe Cluizel, Anthony Courtin,\\Céline Leduc, Charlotte Touchard, Simon Wallon}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Principe général}
+Il s'agit de développer un service de tournois de labyrinthes réparti. Les joueurs sont placés au centre d'un labyrinthe et doivent en sortir. La partie est terminée lorsque qu'un joueur y parvient. Il est alors déclaré vainqueur.
+
+\section{Interface utilisateur}
+Le joueur a deux possibilités :
+\begin{itemize}
+	\item il dispose d'une zone de texte afin de coder sa propre intelligence artificielle
+	\item il joue manuellement avec les touches du clavier
+\end{itemize}
+
+\section{Gestion des parties}
+L'utilisateur peut choisir de créer une partie. Dans ce cas il spécifie le nombre de joueurs maximum. Il peut également choisir de rejoindre une partie en attente.
+
+Une partie en attente est une partie créée qui n'a pas été lancée par son créateur.
+
+Un fois la partie lancée, elle n'est plus dans la liste des parties en attente et ne peut plus être rejointe.
+
+Rappel : dès qu'un joueur atteint la sortie du labyrinthe il est déclaré vainqueur. La partie est alors terminée.
+
+\section{Déplacements}
+L'intelligence artificielle ou le joueur doivent soumettre au programme une des quatre directions suivantes : HAUT, BAS, GAUCHE, DROITE.
+
+Si le temps de réponse du joueur dépasse 1 seconde alors le déplacement n'est pas pris en compte et le joueur reste immobile.
+
+Idem si le déplacement mène le joueur dans un mur.
+
+\section{Serveur}
+Plusieurs parties se déroulent en simultané.
+
+Lorsqu'un joueur rejoint une partie en attente, celle-ci est choisie aléatoirement parmi celles ayant des places disponibles.
+
+
+\end{document}
