@@ -6,7 +6,7 @@ import Array._
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable
 
-class Graph[X](val nom: String, val nbNodes: Int) {
+class Graph[X](val name: String, val nbEdges: Int) {
     var adjacence: Map[Int, ArrayBuffer[Int]] = Map()
 
     def addNode(key: Int, node: X) = {
@@ -72,7 +72,6 @@ class Graph[X](val nom: String, val nbNodes: Int) {
 
     def display = adjacence.keys.foreach {i =>
         println("key : " + i + ", Node : " + adjacence(i).toString +
-                ", Successors : " + getSuccessors(i).mkString(", ") +
-                ", Predecessors : " + getPredecessors(i).mkString(", "))
+                ", Successors : " + getSuccessors(i).mkString(", "))// + ", Predecessors : " + getPredecessors(i).mkString(", "))
     }
 }
