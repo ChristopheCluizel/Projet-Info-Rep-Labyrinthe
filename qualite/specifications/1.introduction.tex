@@ -16,6 +16,26 @@
 % ----------- Principales technologies utilisées -----------
 \section{Principales technologies utilisées}
 \TODO{Charlotte}
+\subsection{Choix du langage de programmation}
+Le côté serveur et le côté client seront tous deux codés en \textbf{Java}.
+
+Ce langage a tout d'abord été choisi car c'est celui que tous les membres de l'équipe du projet maîtrisent le mieux. Les difficultés rencontrées ne seront donc pas dues, en théorie, au langage de programmation.
+
+De plus, un langage orienté objet est adapté à notre projet. Nous pourrions par exemple utiliser un objet Labyrinthe et un objet Joueur. Cela rendra le code ordonné et beaucoup plus compréhensible.
+
+\subsection{Communication client-serveur}
+L'échange d'information entre le serveur et les clients se fera à l'aide de \textbf{sockets}.
+
+Jusqu'à présent, les sockets sont le seul moyen que nous ayons étudié pour faire communiquer un serveur et un client.
+
+D'autre part, les sockets sont facilement utilisables en Java à l'aide du package java.net.
+
+\subsection{Affichage}
+L'interface utilisateur sera réalisée à l'aide de la bibliothèque Java \textbf{Slick}. Après quelques recherches et en visualisant des exemples d'utilisation de différentes bibliothèques, il s'est avéré que la bibliothèque Slick correspond le mieux à nos attentes.
+
+En effet, nous avons imaginé un labyrinthe sous la forme d'une grille ayant des cases vides là où le joueur peut se déplacer et des cases pleines qui représentent les murs.
+
+De plus, cette bibliothèque paraît posséder une documentation complète et une communauté assez active, ce qui nous permettra de trouver rapidement des solutions en cas de difficulté.
 
 % Ce que l'on a dit pdt la réunion, java, socket…
 % pourquoi c'est techno
