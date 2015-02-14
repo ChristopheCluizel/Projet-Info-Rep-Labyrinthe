@@ -19,7 +19,7 @@ class GenerateurLabyrinthe {
 
     def sauvegarderLabyrinthe(graph: Graph[Int]) = {
         val writer = new BufferedWriter(new FileWriter("ressources/" + graph.name + ".dot"))
-        writer.write(graph.adjacence.size + "\n")
+        writer.write(graph.nbEdges + "\n")
         writer.write("graph " + graph.name + " {\n")
         graph.adjacence.keys.foreach { i =>
             for(j <- 0 until graph.adjacence(i).size) {
@@ -41,22 +41,22 @@ class GenerateurLabyrinthe {
         for(i <- 0 until nbEdges){
             val Array(key1, key2) = for(i <- reader.readLine split " -> ") yield i.toInt
             if(!graph.nodePresent(key1)) graph.addNode(key1, key1)
-            if(!graph.nodePresent(key2)) graph.addNode(key2, key2)
+            //if(!graph.nodePresent(key2)) graph.addNode(key2, key2)
             graph.addEdge(key1, key2, 1)
-            graph.addEdge(key2, key1, 1)
+            //graph.addEdge(key2, key1, 1)
         }
         graph
     }
-    def genererLabyrinthe(largeur: Int, hauteur: Int): Graph[Int] = {
-        val graphe = new Graph[Int]("graph2", 2 * largeur * hauteur - largeur - hauteur)
+    def genererLabyrinthe(largeur: Int, hauteur: Int): (Graph[Int], Coordonnees, Coordonnees) = {
+        val graphe = new Graph[Int]("graph1", (largeur * hauteur - 1)*2)
         val tabVoisins = Array.ofDim[Boolean](hauteur, largeur)
         for(i <- 0 until hauteur; j <- 0 until largeur) tabVoisins(i)(j) = false
         val rand = new Random();
-        val positionDepart = new Coordonnees(rand.nextInt(largeur), rand.nextInt(hauteur))
-        // val positionDepart = new Coordonnees(1, 0) // juste pour debug !!!!!!!!!!!!!!!!!!!
-        println("positionDepart : " + positionDepart)
+        //val positionDepart = new Coordonnees(rand.nextInt(largeur), rand.nextInt(hauteur))
+        val positionDepart = new Coordonnees(0, 0)
+        val positionArrivee = new Coordonnees(largeur / 2, hauteur / 2)
 
-        var queue = new scala.collection.mutable.Queue[Int]
+        var stack = new scala.collection.mutable.Stack[Int]
         var markedNode: ArrayBuffer[Int] = ArrayBuffer()
 
         var actualNodeKey = coordinatesToKey(positionDepart.x, positionDepart.y, largeur)
@@ -67,24 +67,22 @@ class GenerateurLabyrinthe {
             val falseNeighbours = getFalseNeighbours(actualNodeKey, tabVoisins, largeur, hauteur)
             if(! falseNeighbours.isEmpty) {
                 val randomFalseNeighbour = getRandomFalseSquareInArray(falseNeighbours)
-                queue += actualNodeKey
+                stack push actualNodeKey
                 removeWallBetween(graphe, actualNodeKey, randomFalseNeighbour)
                 actualNodeKey = randomFalseNeighbour
                 markedNode += actualNodeKey
                 tabVoisins(keyToCoordinates(actualNodeKey, largeur).y)(keyToCoordinates(actualNodeKey, largeur).x) = true
             }
-            else if(! queue.isEmpty) {
-                actualNodeKey = queue.dequeue
+            else if(! stack.isEmpty) {
+                actualNodeKey = stack.head
+                stack.pop
             }
             else {
                 val aleaSquareKey = getRandomFalseSquareInDoubleArray(tabVoisins, largeur, hauteur)
                 actualNodeKey = aleaSquareKey
             }
         }
-        // for(i <- 0 until hauteur) {
-        //     println(tabVoisins(i).mkString(", "))
-        // }
-        return graphe
+        return (graphe, positionArrivee, positionDepart)
     }
     private def getFalseNeighbours(actualNodeKey: Int, tabVoisins: Array[Array[Boolean]], largeur: Int, hauteur: Int): Array[Int] = {
         val position = keyToCoordinates(actualNodeKey, largeur)
@@ -96,8 +94,7 @@ class GenerateurLabyrinthe {
         if(position.y == hauteur-1) maxY = hauteur-1
         if(position.x == 0) minX = 0
         if(position.x == largeur-1) maxX = largeur-1
-        // println("minY : " + minY + ", maxY : " + maxY + ", minX : " + minX + ", maxX : " + maxX)
-        val voisins = for(i <- minY to maxY; j <- minX to maxX if(tabVoisins(i)(j) == false && (i == position.y || j == position.x) && !(i == position.y && j == position.x))) yield coordinatesToKey(i, j, largeur)
+        val voisins = for(i <- minY to maxY; j <- minX to maxX if(tabVoisins(i)(j) == false && (i == position.y || j == position.x) && !(i == position.y && j == position.x))) yield coordinatesToKey(j, i, largeur)
         return voisins.toArray
     }
     private def getRandomFalseSquareInArray(falseNeighbours: Array[Int]): Int = {
@@ -106,8 +103,8 @@ class GenerateurLabyrinthe {
         return falseNeighbours(aleaNumber)
     }
     private def removeWallBetween(graphe: Graph[Int], actualNodeKey: Int, randomFalseNeighbour: Int) = {
-        graphe.addNode(actualNodeKey, actualNodeKey)
-        graphe.addNode(randomFalseNeighbour, randomFalseNeighbour)
+        if(!graphe.nodePresent(actualNodeKey)) graphe.addNode(actualNodeKey, actualNodeKey)
+        if(!graphe.nodePresent(randomFalseNeighbour)) graphe.addNode(randomFalseNeighbour, randomFalseNeighbour)
 
         graphe.addEdge(actualNodeKey, randomFalseNeighbour, 1)
         graphe.addEdge(randomFalseNeighbour, actualNodeKey, 1)
@@ -116,30 +113,6 @@ class GenerateurLabyrinthe {
         val falseSquares = for(i <- 0 until hauteur; j <- 0 until largeur if(tabVoisins(i)(j) == false)) yield coordinatesToKey(i, j, largeur)
         return getRandomFalseSquareInArray(falseSquares.toArray)
     }
-    def keyToCoordinates(key: Int, graphWidth: Int): Coordonnees = new Coordonnees(key / graphWidth, key % graphWidth)
+    def keyToCoordinates(key: Int, graphWidth: Int): Coordonnees = new Coordonnees(key % graphWidth, key / graphWidth)
     def coordinatesToKey(x: Int, y: Int, graphWidth: Int): Int = graphWidth * y + x
-}
-
-object ClassMain {
-    def main(args: Array[String]): Unit = {
-        var generateur = new GenerateurLabyrinthe
-        // var graph = new Graph[Int]("graph1", 4)
-        // graph.addNode(0, 0)
-        // graph.addNode(1, 1)
-        // graph.addNode(2, 2)
-        // graph.addNode(3, 3)
-
-        // graph.addEdge(0, 1, 1)
-        // graph.addEdge(1, 2, 1)
-        // graph.addEdge(2, 0, 1)
-        // graph.addEdge(2, 3, 1)
-
-        // generateur.sauvegarderLabyrinthe(graph)
-        // val graphCharge = generateur.chargerLabyrinthe("ressources/graph1.dot")
-        // graphCharge.display
-        val graphe = generateur.genererLabyrinthe(args(0).toInt, args(0).toInt)
-        // println("=========== Graphe final ============")
-        // graphe.display
-        generateur.sauvegarderLabyrinthe(graphe)
-    }
 }
