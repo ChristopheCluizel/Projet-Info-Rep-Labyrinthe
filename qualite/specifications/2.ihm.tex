@@ -4,14 +4,36 @@
 
 % ------------- Interface de l'écran d'accueil ------------
 \section{Interface de l'écran d'accueil}
-\TODO{Anthony}
+%\TODO{Anthony}
 
+Lorsque l'utilisateur lance le programme, celui-ci est dirigé vers un écran d'accueil. Cette écran est divisé en deux parties principales.
+
+La première, à gauche, est la partie où l'utilisateur a la possibilité de développer sa propre Intelligence Artificielle (IA). L'utilisateur doit coder impérativement en Java sinon la compilation ne fonctionnera pas. 
+
+La deuxième, à droite, est la partie liée au jeu. Une description détaillée des régles du jeu figure en haut de l'écran afin que l'utilisateur novice puisse très vite prendre ses marques. Avant de créer ou rejoindre une partie, l'utilisateur doit renseigner un pseudo. Ce pseudo sera son identifiant lors des parties. De plus, il pourra choisir d'envoyer son IA, qu'il aura développé au préalable, dans le labyrinthe ou bien de jouer manuellement au jeu. Une fois que l'utilisateur aura rentré ces paramètres, il peut choisir de rejoindre une partie ou d'en créer une. S'il choisit d'en créer une il devra renseigner le nombre maximum de joueurs que la partie pourra accueillir. 
+
+Le choit de jouer avec une IA ou manuellement se fera à l'aide de radios bouttons qui mettra en surbrillance le choix de l'utilisateur. 
+
+La figure~\ref{fig:ecran_accueil} représente une maquette de l'écran d'accueil.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.2]{images/schema_ecran_accueil.jpg}
+	\caption{Schéma de l'écran d'accueil'}
+	\label{fig:ecran_accueil}
+\end{figure}
 % description, comment fonctionne l'écran d'accueil et comment on interagit avec…
 
 % ------------- Gestion des parties ------------
 \subsection{Gestion des parties}
-\TODO{Anthony}
+%\TODO{Anthony}
 
+Comme décrit précédemment, l'utilisateur doit compléter tous les paramètres avant de pouvoir jouer. Si les paramètres ne sont que partiellement remplis ou non conforme l'utilisateur ne pourra pas jouer et un message d'erreur sera affiché. Une fois que l'utilisateur a tout rempli correctement, il doit choisir entre rejoindre ou créer une partie. 
+
+S'il choisit de rejoindre une partie, l'utilisateur sera redirigé directement vers la première partie avec des places disponibles. Aucun choix de partie ne sera mis en place afin de faciliter la gestion des salles.
+
+S'il choisit de créer une partie, il doit renseigner le nombre de joueurs maximums et cliquer ensuite sur \textit{GO!}. Si le nombre de joueur n'est pas compris entre 2 et 4 inclus, un message d'erreur sera affiché.
+
+Dans les deux cas, le serveur attend d'avoir le nombre de joueurs requis avant de lancer une partie. De plus, une fois que l'utilisateur a appuyé sur le bouton \textit{jouer} ou \textit{créer}, la compilation s'effectue. Si cette dernière échoue, l'utilisateur ne peut pas rejoindre la partie et est automatiquement redirigé vers l'écran d'accueil avec un message d'erreur.
 % comment on peut faire pour jouer à une partie, création ou rejoindre…
 
 % ------------- Interface d'une partie en cours ------------
