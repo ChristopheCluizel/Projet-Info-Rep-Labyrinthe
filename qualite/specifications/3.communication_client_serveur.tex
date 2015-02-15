@@ -20,4 +20,6 @@
     \section{Communication serveur-client}
         Le serveur est responsable de la diffusion de l'information à l'ensemble des clients. La communication serveur-client sera donc élevée. \\
 
-        Une fois le client connecté au serveur, ce dernier lui envoie le labyrinthe sélectionné, le nombre et le pseudo des joueurs de la partie, afin que le client puisse afficher la partie. À chaque réception de déplacement, le serveur analyse la faisabilité du déplacement et envoie à tous les clients la nouvelle position du joueur.
+        Une fois le client connecté au serveur, ce dernier lui envoie le labyrinthe sélectionné, le nombre et le pseudo des joueurs de la partie, afin que le client puisse afficher la partie. À chaque réception de déplacement, le serveur analyse la faisabilité du déplacement et envoie à tous les clients la nouvelle position du joueur. \\
+
+        \emph{Remarque: si un client se déconnecte en cours de partie, son personnage restera immobile jusqu'à la fin de la partie et le joueur sera déclaré forfait.}
