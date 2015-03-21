@@ -1,0 +1,56 @@
+@startuml
+package Client{
+	class IHM{
+	}
+	class JoueurImpl{
+		getCoordonnees()
+		jouer()
+	}
+	class Vue <<observer>>{
+	}
+}
+
+package Serveur{
+	class ConnexionHelperImpl{
+		creerPartie(Joueur j)
+		rejoindrePartie(Joueur j)
+	}
+	class Labyrinthe{
+	}
+	class Partie <<runnable>>{
+	}
+	class ModeleImpl{
+		Labyrinthe lab
+		Joueur[] joueurs
+		getLabyrinthe()
+		getPositionsJoueurs()
+	}
+}
+
+package RMI{
+	interface ConnexionHelper{
+		creerPartie(Joueur j)
+		rejoindrePartie(Joueur j)
+	}
+	interface Modele <<observable>>{
+		getLabyrinthe()
+		getPositionsJoueurs()
+	}
+	interface Joueur{
+		getCoordonnees()
+   		jouer()
+	}
+}
+
+Joueur <|-- JoueurImpl
+Modele <|-- ModeleImpl
+ConnexionHelper <|-- ConnexionHelperImpl
+Partie "1"*--"n" Joueur
+Partie -- Modele
+Vue -- Modele
+ModeleImpl o-- Labyrinthe
+IHM *-- Vue
+IHM -- ConnexionHelper
+IHM -- JoueurImpl
+ConnexionHelperImpl -- Partie
+@enduml
