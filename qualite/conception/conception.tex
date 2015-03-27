@@ -1,0 +1,96 @@
+\documentclass{scrreprt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[francais]{babel, varioref}
+\usepackage{graphicx}
+\usepackage{listings}
+%\usepackage[pdfborder={0 0 0},
+ %           pdfcreator={},
+   %         pdfsubject={Projet Correcteur orthographique},
+  %          pdftitle={Projet Correcteur orthographique}]{hyperref}
+\usepackage{xspace}
+\usepackage{amssymb}
+\usepackage{calc}
+\usepackage{listingsutf8}
+\usepackage{color}
+\usepackage{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%
+\usepackage{url}
+\usepackage[top=2.1cm,bottom=2.2cm,left=2cm,right=2cm]{geometry}
+\usepackage[final]{pdfpages}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%% Pour sommaire cliquable %%%%%%%%%%
+\usepackage{hyperref} % Créer des liens et des signets
+\hypersetup{
+colorlinks=true, %colorise les liens
+breaklinks=true, %permet le retour à la ligne dans les liens trop longs
+urlcolor= blue, %couleur des hyperliens
+linkcolor= black, %couleur des liens internes
+citecolor=black,  %couleur des références
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand\TODO[1]{\textcolor{red}{\textbf{#1}}}
+
+%pour la coloration du code
+
+\definecolor{colFond}{rgb}{0.8,0.9,0.9}
+\definecolor{hellgelb}{rgb}{1,1,0.8}
+\definecolor{colKeys}{rgb}{0,0,1}
+\definecolor{colIdentifier}{rgb}{0,0,0}
+\definecolor{colComments}{rgb}{0,0.5,0}
+\definecolor{colString}{rgb}{0.62,0.12,0.94}
+
+\lstset{
+  language=Java,
+  float=hbp,
+  basicstyle=\ttfamily\small,
+  identifierstyle=\color{colIdentifier},
+  keywordstyle=\bf \color{colKeys},
+  stringstyle=\color{colString},
+  commentstyle=\color{colComments},
+  columns=flexible,
+  tabsize=3,
+  frame=single,
+  frame=shadowbox,
+  rulesepcolor=\color[gray]{0.5},
+  extendedchars=true,
+  showspaces=false,
+  showstringspaces=false,
+  numbers=left,
+  firstnumber=1,
+  numberstyle=\tiny,
+  breaklines=true,
+  backgroundcolor=\color{hellgelb},
+  captionpos=b,
+}
+
+\usepackage{templateINSA}
+\initINSA
+
+\title{Javabyrinthe}
+
+\author{Alexandre \bsc{Brehmer}\\ Christophe \bsc{Cluizel} \\ Anthony \bsc{Courtin} \\ Céline \bsc{Leduc} \\ Charlotte \bsc{Touchard} \\ Simon \bsc{Wallon}}
+\renewcommand\soustitre{Document de Conception}
+\renewcommand\infoBig{Projet d'Informatique Répartie}
+\renewcommand\infoSmall{}
+
+\begin{document}
+ \titleINSA{15}{images/page_couverture.png}{0}{0}{225}{\url{http://fvirtman.free.fr/progs/makelaby.png}{\textcolor{white}{makezine.com}}}
+
+\tableofcontents
+
+%\input{1.introduction.tex}
+
+%\input{2.ihm.tex}
+
+%\input{3.communication_client_serveur.tex}
+
+%\input{4.gestion_serveur.tex}
+
+
+\end{document}

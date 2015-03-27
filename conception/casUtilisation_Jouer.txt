@@ -1,0 +1,13 @@
+﻿@startuml
+left to right direction
+skinparam packageStyle rect
+actor utilisateur
+rectangle Jouer {
+  utilisateur -- (Passer son tour)
+  utilisateur -- (Se déplacer)
+  (Se déplacer) <|-- (Aller en haut)
+  (Se déplacer) <|-- (Aller en gas)
+  (Se déplacer) <|-- (Aller à droite)
+  (Se déplacer) <|-- (Aller à gauche)
+}
+@enduml
