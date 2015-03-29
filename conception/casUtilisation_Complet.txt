@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+skinparam packageStyle rect
+actor Joueur
+rectangle Javabyrinthe {
+
+  Joueur -- (Se déplacer)
+  Joueur -- (Passer son tour)
+  Joueur -- (Lancer une partie)
+
+  (Lancer une partie) <|-- (Créer une partie)
+  (Lancer une partie) <|-- (Rejoindre une partie)
+  (Choisir le mode de jeu) <. (Lancer une partie) : include
+  (Choisir le mode de jeu) .> (Coder une IA) : extends
+  (Indiquer un pseudo) <. (Lancer une partie) : include
+  (Créer une partie) .> (Indiquer le nombre de joueurs) : include
+
+}
+@enduml
