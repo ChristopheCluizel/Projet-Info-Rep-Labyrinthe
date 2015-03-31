@@ -1,4 +1,4 @@
-package "javabyrinth"{
+package "javabyrinthe"{
 
 class Partie{
     - nbJoueurMax : int
@@ -15,14 +15,14 @@ class Partie{
     + getNbTourMax() : int
     + getNbTour() : int
 }
-class Labyrinth{
+class Labyrinthe{
     --
     +isWall(x : int, y : int) : bool
-    
+
 }
 class IHM{
-    +m_partie : Partie
-    —
+    - m_partie : Partie
+    --
     +getPartie() : Partie
     +setPartie(partie : Partie) : void
     +update() : void
@@ -65,6 +65,7 @@ PartieRunner o-- Partie : 1
 Serveur *-- PartieManageur : 1
 Client *-- Joueur : 1
 IHM o-- Partie : 1
-Client *— IHM : 1
-Partie *-- Labyrinth : 1
+Client o-- Partie : 1
+Client *-- IHM : 1
+Partie *-- Labyrinthe : 1
 }

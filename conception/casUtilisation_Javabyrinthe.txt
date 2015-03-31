@@ -1,9 +1,0 @@
-﻿@startuml
-left to right direction
-skinparam packageStyle rect
-actor utilisateur
-rectangle Javabyrinthe {
-  utilisateur -- (Jouer)
-  (Jouer) .> (Lancer une partie) : include
-}
-@enduml
