@@ -1,0 +1,70 @@
+package "javabyrinth"{
+
+class Partie{
+    - nbJoueurMax : int
+    - nbJoueur : int
+    - nbTourMax : int
+    - nbTour : int
+    --
+    + tourSuivant() : void
+    + addJoueur(joueur : Joueur) : void
+    + getXJoueur(index : int) : int
+    + getYJoueur(index : int) : int
+    + getNbJoueurMax() : int
+    + getNbJoueur() : int
+    + getNbTourMax() : int
+    + getNbTour() : int
+}
+class Labyrinth{
+    --
+    +isWall(x : int, y : int) : bool
+    
+}
+class IHM{
+    +m_partie : Partie
+    —
+    +getPartie() : Partie
+    +setPartie(partie : Partie) : void
+    +update() : void
+}
+class Joueur{
+    - pseudo : String
+    - x : int
+    - y : int
+    --
+    +<i>jouer() : String</i>
+}
+class JoueurH{
+    --
+    +jouer() : String
+}
+class JoueurIA{
+    --
+    +jouer() : String
+}
+class PartieManageur{
+    +creerPartie(client : String, nbJoueurMax : int) : Partie
+    +rejoindrePartie(client : String) : Partie
+}
+class PartieRunner{
+    +run() : void
+}
+
+class Client{
+    +main() : void
+}
+class Serveur{
+    +main() : void
+}
+Joueur <|-- JoueurH
+Joueur <|-- JoueurIA
+Partie *-- Joueur : 0..n
+PartieManageur *-- Partie : 0..n
+PartieRunner <-down- PartieManageur
+PartieRunner o-- Partie : 1
+Serveur *-- PartieManageur : 1
+Client *-- Joueur : 1
+IHM o-- Partie : 1
+Client *— IHM : 1
+Partie *-- Labyrinth : 1
+}
