@@ -1,0 +1,54 @@
+@startuml
+entity serveur
+actor client1
+actor client2
+activate serveur
+activate client1
+activate client2
+
+create Joueur1
+client1 -> Joueur1 : new Joueur()
+deactivate client1
+create JoueurIA2
+client2 -> JoueurIA2 : new JoueurIA()
+deactivate client2
+
+activate client1 
+client1 -> serveur : créerPartie(Joueur1, nbJoueurMax)
+
+create partie1
+serveur -> partie1 : new Partie()
+serveur -> partie1 : addJoueur(Joueur)
+serveur <-- partie1
+client1 <-- serveur
+deactivate client1
+
+activate client2
+client2 -> serveur : rejoindrePartie(Joueur2)
+serveur -> partie1 : addJoueur(Joueur)
+serveur <-- partie1
+client2 <-- serveur
+
+deactivate client2
+
+create PartieRunner
+serveur -> PartieRunner : demarrerPartie(partie1)
+loop tour
+PartieRunner -> partie1 : tourSuivant()
+loop joueur
+    alt joueurIA
+        activate JoueurIA2
+        partie1 -> JoueurIA2 : jouer()
+        partie1 <-- JoueurIA2 : direction
+        deactivate JoueurIA2
+    else
+        activate Joueur1
+        partie1 -> Joueur1 : jouer()
+        partie1 <-- Joueur1 : direction
+        deactivate Joueur1
+    end
+end
+end
+
+
+@enduml
