@@ -1,11 +1,11 @@
-javac javabyrinth/*.java
+javac javabyrinthe/*.java
 
-cp -R javabyrinth/*.class serveur/javabyrinth/
-cp -R javabyrinth/serveur/*.class serveur/javabyrinth/serveur/
+cp -R javabyrinthe/*.class serveur/javabyrinthe/
+cp -R javabyrinthe/serveur/*.class serveur/javabyrinthe/serveur/
 
-cp -R javabyrinth/*.class client/javabyrinth/
+cp -R javabyrinthe/*.class client/javabyrinthe/
 
-cp -R javabyrinth/*.class rmiregistry/javabyrinth/
+cp -R javabyrinthe/*.class rmiregistry/javabyrinthe/
 
 javac serveur/*.java
 
