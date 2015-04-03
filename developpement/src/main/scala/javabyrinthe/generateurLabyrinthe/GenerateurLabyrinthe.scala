@@ -1,4 +1,4 @@
-package generateurLabyrinthe
+package javabyrinthe.generateurLabyrinthe
 
 import scala.util._
 import java.io.BufferedWriter
@@ -9,7 +9,7 @@ import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
 import scala.collection.mutable.ArrayBuffer
-import graph._
+import javabyrinthe.graph.Graph
 
 class Coordonnees(var x: Int, var y: Int) {
     override def toString: String = "(" + x + ", " + y + ")"

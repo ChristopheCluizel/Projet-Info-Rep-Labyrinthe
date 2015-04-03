@@ -1,4 +1,4 @@
-package generateurLabyrinthe;
+package javabyrinthe
 
 import org.newdawn.slick.BasicGame
 import org.newdawn.slick.Color
@@ -7,7 +7,8 @@ import org.newdawn.slick.Graphics
 import org.newdawn.slick.Input
 import org.newdawn.slick.SlickException
 import org.newdawn.slick.geom.Line
-import graph._;
+import javabyrinthe.graph.Graph;
+import javabyrinthe.generateurLabyrinthe.GenerateurLabyrinthe
 import org.newdawn.slick.geom.Rectangle
 
 class  WindowGame extends BasicGame("Javabyrinthe") {
@@ -27,7 +28,7 @@ class  WindowGame extends BasicGame("Javabyrinthe") {
 	override def update(gc: GameContainer, i: Int) {
 
 	}
-	
+
 	override def render(gc: GameContainer, g: Graphics) {
 		gc.setShowFPS(false);	// permet de ne pas afficher les FPS
 		g.setBackground(Color.white)
@@ -35,7 +36,7 @@ class  WindowGame extends BasicGame("Javabyrinthe") {
 		var x = 0
 		var y = 0
 		var offsetBordFenetre = 10
-		
+
 		graphe.adjacence.keys.foreach{key =>
 			x = generateur.keyToCoordinates(key, tailleLabyrinthe).x
 			y = generateur.keyToCoordinates(key, tailleLabyrinthe).y
@@ -46,7 +47,7 @@ class  WindowGame extends BasicGame("Javabyrinthe") {
 			g.setColor(Color.blue)
 			g.fillRect(positionArrivee.x * tailleCase  + offsetBordFenetre, positionArrivee.y * tailleCase + offsetBordFenetre, tailleCase, tailleCase)
 		}
-		
+
 		graphe.adjacence.keys.foreach{key =>
 		  	x = generateur.keyToCoordinates(key, tailleLabyrinthe).x
 			y = generateur.keyToCoordinates(key, tailleLabyrinthe).y
@@ -63,9 +64,9 @@ class  WindowGame extends BasicGame("Javabyrinthe") {
 		}
 		Thread.sleep(40)
 	}
-	
+
     override def keyReleased(key: Int, c: Char) {
-		
+
         if (Input.KEY_ESCAPE == key) {
             this.container.exit();
         }

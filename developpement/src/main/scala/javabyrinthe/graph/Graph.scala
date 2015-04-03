@@ -1,4 +1,4 @@
-package graph
+package javabyrinthe.graph
 
 import math._
 import scala.util._
