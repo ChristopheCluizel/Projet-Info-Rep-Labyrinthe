@@ -4,7 +4,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Arrays;
 import java.util.UUID;
 
-import javabyrinth.*;
+import javabyrinthe.*;
 
 public class Client {
   public static void main(String args[]) {

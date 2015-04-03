@@ -1,4 +1,4 @@
-package javabyrinth;
+package javabyrinthe;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

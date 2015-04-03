@@ -3,7 +3,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Arrays;
 
-import javabyrinth.*;
+import javabyrinthe.*;
 
 public class Serveur {
   public static void main(String args[]) {

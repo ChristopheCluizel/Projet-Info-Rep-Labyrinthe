@@ -1,11 +1,11 @@
-package javabyrinth;
+package javabyrinthe;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import javabyrinth.serveur.*;
+import javabyrinthe.serveur.*;
 import java.util.ArrayList;
 
 public class PartieManagerImpl implements PartieManager, Remote {

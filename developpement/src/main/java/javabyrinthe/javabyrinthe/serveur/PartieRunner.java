@@ -1,7 +1,7 @@
-package javabyrinth.serveur;
+package javabyrinthe.serveur;
 
 import java.lang.*;
-import javabyrinth.*;
+import javabyrinthe.*;
 
 public class PartieRunner implements  Runnable {
   Partie partie;
