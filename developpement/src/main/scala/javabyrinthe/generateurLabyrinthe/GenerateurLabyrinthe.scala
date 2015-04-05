@@ -17,8 +17,8 @@ class Coordonnees(var x: Int, var y: Int) {
 
 class GenerateurLabyrinthe {
 
-    def sauvegarderLabyrinthe(graph: Graph[Int]) = {
-        val writer = new BufferedWriter(new FileWriter("ressources/" + graph.name + ".dot"))
+    def sauvegarderLabyrinthe(graph: Graph[Int], cheminFichier: String) = {
+        val writer = new BufferedWriter(new FileWriter(cheminFichier + graph.name + ".dot"))
         writer.write(graph.nbEdges + "\n")
         writer.write("graph " + graph.name + " {\n")
         graph.adjacence.keys.foreach { i =>
