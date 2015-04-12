@@ -17,7 +17,7 @@ public class modele {
 	// Exemple :
 	 public static String choisirDirection() {
 	 		return "haut"; // ou "bas", "droite", "gauche"
-	 //}
+	 }
 	
 //} // TO ADD après avoir inséré la fonction écrite par le joueur pour son IA !
  
