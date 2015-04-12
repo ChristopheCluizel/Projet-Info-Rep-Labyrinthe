@@ -6,21 +6,42 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import javabyrinthe.serveur.*;
-import java.util.ArrayList;
+import java.util.*;
 
 public class PartieManagerImpl implements PartieManager, Remote {
 	ArrayList<Partie> partieList;
+	HashMap<String,JoueurIA> joueurIAList;
 	String machine = "localhost";
 	int port = 1099;
 	Registry registry;
 	public PartieManagerImpl() throws RemoteException{
 		registry = LocateRegistry.getRegistry(machine, port);
 		partieList = new ArrayList<Partie>();
+		joueurIAList = new HashMap<String,JoueurIA>();
 	}
 	
+	public boolean creerJoueurIA(String idClient, String pseudo, String codeIA) {
+		JoueurIA joueur = new JoueurIA(pseudo, codeIA);
+		joueurIAList.put(idClient,joueur);
+		return joueurIAList.containsKey(idClient);
+	}
+	
+	private Joueur getJoueurFromIdClient(String idClient) {
+		try {
+			if (joueurIAList.containsKey(idClient)) {
+				return joueurIAList.get(idClient);
+			} else {
+	        	return (Joueur)registry.lookup(idClient);
+	        }
+	    } catch (Exception e) {
+      		System.out.println(e);
+   		}
+		return null;
+	}
+		
 	public Partie creerPartie(String client, int nbJoueurMax) throws RemoteException {
 		try {
-	        Joueur joueur = (Joueur)registry.lookup(client);
+			Joueur joueur = getJoueurFromIdClient(client);
 			Partie nouvellePartie = new PartieImpl(nbJoueurMax);
 			nouvellePartie.addJoueur(joueur);
 			partieList.add(nouvellePartie);
