@@ -1,4 +1,4 @@
-package javabyrinthe;
+package javabyrinthe.jeu;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;

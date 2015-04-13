@@ -1,4 +1,4 @@
-package client;
+package javabyrinthe.rmi.client;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -6,7 +6,10 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Arrays;
 import java.util.UUID;
 
-import javabyrinthe.*;
+import javabyrinthe.jeu.Joueur;
+import javabyrinthe.jeu.JoueurImpl;
+import javabyrinthe.jeu.Partie;
+import javabyrinthe.jeu.PartieManager;
 
 public class Client {
   public static void main(String args[]) {

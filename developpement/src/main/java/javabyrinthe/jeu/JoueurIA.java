@@ -1,4 +1,4 @@
-package javabyrinthe;
+package javabyrinthe.jeu;
 
 import java.util.*;
 import java.io.*;
