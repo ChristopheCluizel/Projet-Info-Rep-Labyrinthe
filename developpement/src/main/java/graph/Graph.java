@@ -1,10 +1,11 @@
 package graph;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class Graph {
+public class Graph implements Serializable {
 	String name;
 	Integer nbEdge;
 	HashMap<Integer, ArrayList<Integer>> adjacence;

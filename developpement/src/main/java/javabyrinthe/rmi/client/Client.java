@@ -26,16 +26,12 @@ public class Client {
             registry.rebind(id, stub);
         System.out.println("Service "+id+" lié au registre");
 
-
         PartieManager partieManager = (PartieManager)registry.lookup("PartieManager");
         Partie partie;
         if(args[0].contains("C"))
-            partie=partieManager.creerPartie(id,2);
+            partie = partieManager.creerPartie(id,2);
         else if(args[0].contains("R"))
-            partie=partieManager.rejoindrePartie(id);
-
-        
-
+            partie = partieManager.rejoindrePartie(id);
     } catch (Exception e) {
        System.out.println("Client exception: " +e);
     }

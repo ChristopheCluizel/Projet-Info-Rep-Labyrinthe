@@ -6,12 +6,13 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 
 import javabyrinthe.tools.Coordonnee;
 
-public class GenerateurLabyrinthe {
+public class GenerateurLabyrinthe implements Serializable{
 	
-	public static Labyrinthe chargerLabyrinthe(String cheminFichier) throws FileNotFoundException {
+	public Labyrinthe chargerLabyrinthe(String cheminFichier) throws FileNotFoundException {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(cheminFichier));
 			Integer nbEdges = Integer.parseInt(reader.readLine());

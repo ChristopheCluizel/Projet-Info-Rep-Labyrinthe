@@ -1,6 +1,8 @@
 package javabyrinthe.tools;
 
-public class Coordonnee {
+import java.io.Serializable;
+
+public class Coordonnee implements Serializable {
 	Integer x;
 	Integer y;
 	

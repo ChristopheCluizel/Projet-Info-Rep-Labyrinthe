@@ -8,7 +8,7 @@ public class MainClass {
 
 	public static void main(String[] args) {
 		try {
-			Labyrinthe laby = GenerateurLabyrinthe.chargerLabyrinthe("src/main/resources/graph1.dot");
+			Labyrinthe laby = new GenerateurLabyrinthe().chargerLabyrinthe("src/main/resources/graph1.dot");
 			laby.getGraph().display();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

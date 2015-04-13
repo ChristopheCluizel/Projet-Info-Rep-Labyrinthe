@@ -1,9 +1,11 @@
 package javabyrinthe.labyrinthe;
 
+import java.io.Serializable;
+
 import javabyrinthe.tools.Coordonnee;
 import graph.Graph;
 
-public class Labyrinthe {
+public class Labyrinthe implements Serializable {
 	Graph graph;
 	Integer taille;
 	Coordonnee depart;
