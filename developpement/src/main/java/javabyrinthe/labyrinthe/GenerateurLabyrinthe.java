@@ -11,7 +11,7 @@ import javabyrinthe.tools.Coordonnee;
 
 public class GenerateurLabyrinthe {
 	
-	public Labyrinthe chargerGraphe(String cheminFichier) throws FileNotFoundException {
+	public static Labyrinthe chargerLabyrinthe(String cheminFichier) throws FileNotFoundException {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(cheminFichier));
 			Integer nbEdges = Integer.parseInt(reader.readLine());
@@ -28,7 +28,7 @@ public class GenerateurLabyrinthe {
 				graph.addEdge(Integer.parseInt(keys[0]), Integer.parseInt(keys[1]), 1);
 			}
 			reader.close();
-			return new Labyrinthe(graph, new Coordonnee(0, 0), new Coordonnee(graph.getSize() / 2, graph.getSize() / 2));
+			return new Labyrinthe(graph, new Coordonnee(graph.getSize() / 2, graph.getSize() / 2), new Coordonnee(0, 0)); // le départ est le centre du labyrinthe
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
