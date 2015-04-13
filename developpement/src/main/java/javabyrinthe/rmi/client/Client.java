@@ -1,4 +1,4 @@
-package client;
+package javabyrinthe.rmi.client;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
