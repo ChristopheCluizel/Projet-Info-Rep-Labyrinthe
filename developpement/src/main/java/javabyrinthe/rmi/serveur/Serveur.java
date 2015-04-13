@@ -5,7 +5,8 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Arrays;
 
-import javabyrinthe.*;
+import javabyrinthe.jeu.PartieManager;
+import javabyrinthe.jeu.PartieManagerImpl;
 
 public class Serveur {
   public static void main(String args[]) {

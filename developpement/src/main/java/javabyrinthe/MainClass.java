@@ -3,8 +3,6 @@ import java.io.FileNotFoundException;
 
 import javabyrinthe.labyrinthe.GenerateurLabyrinthe;
 import javabyrinthe.labyrinthe.Labyrinthe;
-//import javabyrinthe.labyrinthe.GenerateurLabyrinthe;
-//import javabyrinthe.labyrinthe.Labyrinthe;
 
 public class MainClass {
 
