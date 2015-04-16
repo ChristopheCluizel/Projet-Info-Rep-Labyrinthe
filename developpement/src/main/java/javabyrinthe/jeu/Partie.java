@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.io.Serializable;
 
-import javabyrinthe.labyrinthe.Labyrinthe;
+import javabyrinthe.labyrinthe.Labyrinth;
 
 public interface Partie extends Remote, Serializable {
   //public Partie(int nbJoueurMax) throws RemoteException;
@@ -14,5 +14,5 @@ public interface Partie extends Remote, Serializable {
   public int getnbJoueur();
   public int getnbTourMax();
   public int getnbTour();
-  public Labyrinthe getLabyrinthe();
+  public Labyrinth getLabyrinthe();
 }

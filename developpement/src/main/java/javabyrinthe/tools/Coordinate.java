@@ -2,11 +2,11 @@ package javabyrinthe.tools;
 
 import java.io.Serializable;
 
-public class Coordonnee implements Serializable {
+public class Coordinate implements Serializable {
 	Integer x;
 	Integer y;
 	
-	public Coordonnee(Integer x, Integer y) {
+	public Coordinate(Integer x, Integer y) {
 		this.x = x;
 		this.y = y;
 	}

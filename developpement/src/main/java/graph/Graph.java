@@ -9,11 +9,13 @@ public class Graph implements Serializable {
 	String name;
 	Integer nbEdge;
 	HashMap<Integer, ArrayList<Integer>> adjacence;
+	Integer size;
 	
 	public Graph(String name, Integer nbEdge) {
 		this.name = name;
 		this.nbEdge = nbEdge;
-		adjacence = new HashMap<Integer, ArrayList<Integer>>();
+		this.adjacence = new HashMap<Integer, ArrayList<Integer>>();
+		this.size = adjacence.size();
 	}
 	
 	public HashMap<Integer, ArrayList<Integer>> getAdjacence() {
@@ -21,7 +23,7 @@ public class Graph implements Serializable {
 	}
 	
 	public Integer getSize() {
-		return this.adjacence.size();
+		return this.size;
 	}
 	
 	public void addNode(Integer key) {

@@ -5,8 +5,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import javabyrinthe.labyrinthe.GenerateurLabyrinthe;
-import javabyrinthe.labyrinthe.Labyrinthe;
+import javabyrinthe.labyrinthe.LabyrinthGenerator;
+import javabyrinthe.labyrinthe.Labyrinth;
 
 public class PartieImpl implements Partie, Remote {
   public int nbJoueurMax = 2;
@@ -14,21 +14,21 @@ public class PartieImpl implements Partie, Remote {
   public int nbTourMax = 3;
   public int nbTour = 0;
   
-  Labyrinthe labyrinthe;
+  Labyrinth labyrinth;
   ArrayList<Joueur> joueurList;
 
 	public PartieImpl(int nbJoueurMax) throws RemoteException{
 		this.nbJoueurMax = nbJoueurMax;
 		this.joueurList = new ArrayList<Joueur>();
 		try {
-			this.labyrinthe = new GenerateurLabyrinthe().chargerLabyrinthe("graph1.dot");
+			this.labyrinth = new LabyrinthGenerator().loadLabyrinth("graph1.dot");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public Labyrinthe getLabyrinthe() {
-		return labyrinthe;
+	public Labyrinth getLabyrinthe() {
+		return labyrinth;
 	}
 
 	public void tourSuivant() throws RemoteException {
