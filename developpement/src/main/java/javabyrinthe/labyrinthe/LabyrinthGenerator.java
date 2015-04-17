@@ -10,6 +10,11 @@ import java.io.Serializable;
 
 import javabyrinthe.tools.Coordinate;
 
+/**
+ * LabyrinthGenerator allows to load a labyrinth from a file, to permute between key node of the graph and coordinate of the labyrinth and vice versa
+ * 
+ * @author christophe
+ */
 public class LabyrinthGenerator implements Serializable{
 	
 	/**
