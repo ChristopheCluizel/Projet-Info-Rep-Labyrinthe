@@ -58,7 +58,7 @@ public class Labyrinth implements Serializable {
 	 * @see Graph
 	 */
 	public Graph getGraph() {
-		return graph;
+		return this.graph;
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class Labyrinth implements Serializable {
 	 * @return the size of the labyrinth
 	 */
 	public Integer getSize() {
-		return size;
+		return this.size;
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class Labyrinth implements Serializable {
 	 * @see Coordinate
 	 */
 	public Coordinate getDeparture() {
-		return departure;
+		return this.departure;
 	}
 
 	/**
@@ -87,9 +87,27 @@ public class Labyrinth implements Serializable {
 	 * @see Coordinate
 	 */
 	public Coordinate getArrival() {
-		return arrival;
+		return this.arrival;
 	}
 	
+	/**
+	 * Set the arrival square coordinate of the labyrinth
+	 * 
+	 * @param arrival the arrival square coordinate of the labyrinth
+	 * @see Coordinate
+	 */
+	public void setArrival(Coordinate arrival) {
+		this.arrival = arrival;
+	}
+	
+	/**
+	 * Return the coordinate of the next square according to a move order 
+	 * 
+	 * @param order the order of move (HAUT, BAS, GAUCHE, DROITE)
+	 * @param actualPosition the coordinate of the actual position
+	 * @return the coordinate of the next square
+	 * @see Coordinate
+	 */
 	public Coordinate getNextSquareFromOrder(String order, Coordinate actualPosition) {
 		
 		switch(order) {

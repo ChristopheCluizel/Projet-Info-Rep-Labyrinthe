@@ -7,8 +7,7 @@ import java.io.Serializable;
 import javabyrinthe.labyrinthe.Labyrinth;
 
 public interface Partie extends Remote, Serializable {
-  //public Partie(int nbJoueurMax) throws RemoteException;
-  public void tourSuivant() throws RemoteException;
+  public String tourSuivant() throws RemoteException;
   public void addJoueur(Joueur joueur) throws RemoteException;
   public int getnbJoueurMax();
   public int getnbJoueur();

@@ -7,8 +7,8 @@ import java.io.Serializable;
  * @author christophe
  */
 public class Coordinate implements Serializable {
-	Integer x;
-	Integer y;
+	int x;
+	int y;
 	
 	/**
 	 * Construct a Coordinate with an initialization
@@ -16,7 +16,7 @@ public class Coordinate implements Serializable {
 	 * @param x the x coordinate
 	 * @param y the y coordinate
 	 */
-	public Coordinate(Integer x, Integer y) {
+	public Coordinate(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -26,7 +26,7 @@ public class Coordinate implements Serializable {
 	 * 
 	 * @return the x coordinate
 	 */
-	public Integer getX() {
+	public int getX() {
 		return this.x;
 	}
 	
@@ -35,8 +35,18 @@ public class Coordinate implements Serializable {
 	 * 
 	 * @return the y coordinate
 	 */
-	public Integer getY() {
+	public int getY() {
 		return this.y;
+	}
+	
+	/**
+	 * Compare 2 Coordinates
+	 * 
+	 * @param that the coordinate to compare with
+	 * @return if the 2 coordinates are equal
+	 */
+	public Boolean equals(Coordinate that) {
+		return (this.x == that.getX() && this.y == that.getY());
 	}
 	
 	@Override 

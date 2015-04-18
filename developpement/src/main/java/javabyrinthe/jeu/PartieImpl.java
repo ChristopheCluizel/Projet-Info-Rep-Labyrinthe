@@ -23,9 +23,10 @@ public class PartieImpl implements Partie, Remote {
 	   this.joueurList = new ArrayList<Joueur>();
 	   try {
 		   this.labyrinth = new LabyrinthGenerator().loadLabyrinth("graph1.dot");
+		   this.labyrinth.setArrival(new Coordinate(3, 2)); // for debug only (to shorten the path to arrival) !!!!!
 		   System.out.println("######### Labyrinthe chargé ##########");
-		   System.out.println("Key departure: " + new LabyrinthGenerator().coordinatesToKey(this.labyrinth.getDeparture(), this.labyrinth.getSize()));
-		   System.out.println("Key arrival: " + new LabyrinthGenerator().coordinatesToKey(this.labyrinth.getArrival(), this.labyrinth.getSize()));
+		   System.out.println("Key departure: " + new LabyrinthGenerator().coordinatesToKey(this.labyrinth.getDeparture(), this.labyrinth.getSize()) + " -> " + this.labyrinth.getDeparture().toString());
+		   System.out.println("Key arrival: " + new LabyrinthGenerator().coordinatesToKey(this.labyrinth.getArrival(), this.labyrinth.getSize()) + " -> " + this.labyrinth.getArrival().toString());
 		   System.out.println("######################################");
 	   } catch (FileNotFoundException e) {
 		   e.printStackTrace();
@@ -36,7 +37,7 @@ public class PartieImpl implements Partie, Remote {
 	   return labyrinth;
    }
 
-   public void tourSuivant() throws RemoteException {
+   public String tourSuivant() throws RemoteException {
 	   this.nbTour++;
 	   for(Joueur joueur : this.joueurList){
 		   try{
@@ -45,15 +46,20 @@ public class PartieImpl implements Partie, Remote {
 			   if(this.labyrinth.isAuthorizedMove(joueur.getActualPosition(), nextPosition)) {
 				   joueur.setActualPosition(nextPosition);
 				   System.out.println("Tour " + this.nbTour + " -> déplacement vers " + choixDeplacement + " effectué.");
+//				   System.out.println("ACTUAL position : " + joueur.getActualPosition().toString());
+//				   System.out.println("ARRIVAL position : " + this.labyrinth.getArrival().toString());
+				   if(joueur.getActualPosition().equals(this.labyrinth.getArrival())) {
+					   return joueur.getPseudo();
+				   }
 			   }
 			   else {
 				   System.out.println("Tour " + this.nbTour + " -> déplacement vers " + choixDeplacement + " impossible !");
 			   }
-			   
 		   }catch(Exception e){
 			   System.out.println("Erreur tour: " + this.nbTour + " -> " + e);
 		   }
 	   }
+	   return "";
    }
 
    public void addJoueur(Joueur joueur) throws RemoteException {

@@ -36,9 +36,9 @@ public class Client {
         		partie = partieManager.creerPartie(stringIdClient, "christopheIA", "IA", nbJoueurMaxParPartie);
         else if(args[0].contains("R"))
         	if(args[1].contains("H"))
-        		partie = partieManager.rejoindrePartie(stringIdClient, "christophe", "humain");
+        		partie = partieManager.rejoindrePartie(stringIdClient, "Paul", "humain");
         	else
-        		partie = partieManager.rejoindrePartie(stringIdClient, "christopheIA", "IA");
+        		partie = partieManager.rejoindrePartie(stringIdClient, "PaulIA", "IA");
     } catch (Exception e) {
        System.out.println("Client exception: " + e);
     }

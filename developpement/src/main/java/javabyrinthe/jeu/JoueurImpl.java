@@ -12,6 +12,11 @@ public class JoueurImpl implements Joueur, Remote {
 	String pseudo = "";
 	Coordinate actualPosition;
 	
+	/** 
+	 * Ask a player to play by entering his move order
+	 * 
+	 * @return the answer entered by the player
+	 */
 	public String jouer() throws RemoteException {
 		System.out.println("A ton tour de jouer. Ta position actuelle : " + actualPosition.toString());
 		Scanner sc = new Scanner(System.in);
@@ -37,10 +42,20 @@ public class JoueurImpl implements Joueur, Remote {
 		this.actualPosition = actualPosition;
 	}
 	
+	/**
+	 *	Set the pseudo of the player
+	 *
+	 *	@param the pseudo of the player
+	 */
 	public void setPseudo(String pseudo) throws RemoteException {
 		this.pseudo = pseudo;
 	}
 	
+	/**
+	 * 	Get the pseudo of the player
+	 * 
+	 * 	@return the pseudo of the player
+	 */
 	public String getPseudo() throws RemoteException {
 		return this.pseudo;
 	}
