@@ -7,11 +7,12 @@ import java.util.ArrayList;
 
 import javabyrinthe.labyrinthe.LabyrinthGenerator;
 import javabyrinthe.labyrinthe.Labyrinth;
+import javabyrinthe.tools.Coordinate;
 
 public class PartieImpl implements Partie, Remote {
    int nbJoueurMax = 2;
    int nbJoueur = 0;
-   int nbTourMax = 3;
+   int nbTourMax = 50;
    int nbTour = 0;
   
    Labyrinth labyrinth;
@@ -22,6 +23,8 @@ public class PartieImpl implements Partie, Remote {
 	   this.joueurList = new ArrayList<Joueur>();
 	   try {
 		   this.labyrinth = new LabyrinthGenerator().loadLabyrinth("graph1.dot");
+		   System.out.println("departure:" + new LabyrinthGenerator().coordinatesToKey(this.labyrinth.getDeparture(), this.labyrinth.getSize()));
+		   System.out.println("arrival:" + new LabyrinthGenerator().coordinatesToKey(this.labyrinth.getArrival(), this.labyrinth.getSize()));
 	   } catch (FileNotFoundException e) {
 		   e.printStackTrace();
 	   }
@@ -36,14 +39,23 @@ public class PartieImpl implements Partie, Remote {
 	   for(Joueur joueur : this.joueurList){
 		   try{
 			   String choixDeplacement = joueur.jouer();
-			   System.out.println("tour:" + this.nbTour + " jeu " + choixDeplacement);
+			   Coordinate nextPosition = this.labyrinth.getNextSquareFromOrder(choixDeplacement, joueur.getActualPosition());
+			   if(this.labyrinth.isAuthorizedMove(joueur.getActualPosition(), nextPosition)) {
+				   joueur.setActualPosition(nextPosition);
+				   System.out.println("tour:" + this.nbTour + " déplacement: " + choixDeplacement);
+			   }
+			   else {
+				   System.out.println("tour:" + this.nbTour + " déplacement: " + choixDeplacement + " impossible !");
+			   }
+			   
 		   }catch(Exception e){
-			   System.out.println("tour " + this.nbTour + " -> " + e);
+			   System.out.println("Erreur tour: " + this.nbTour + " -> " + e);
 		   }
 	   }
    }
 
    public void addJoueur(Joueur joueur) throws RemoteException {
+	   joueur.setActualPosition(this.labyrinth.getDeparture());
 	   this.joueurList.add(joueur);
 	   this.nbJoueur++;
 	   System.out.println(this.nbJoueur + "/" + this.nbJoueurMax);

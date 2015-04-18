@@ -1,6 +1,7 @@
 package javabyrinthe.labyrinthe;
 
 import java.io.Serializable;
+import java.lang.Math;
 
 import javabyrinthe.tools.Coordinate;
 import graph.Graph;
@@ -29,7 +30,7 @@ public class Labyrinth implements Serializable {
 		this.graph = graph;
 		this.departure = departure;
 		this.arrival = arrival;
-		this.size = graph.getSize();
+		this.size = (int)Math.sqrt(graph.getSize());
 	}
 	
 	/**
@@ -43,8 +44,10 @@ public class Labyrinth implements Serializable {
 	 */
 	public Boolean isAuthorizedMove(Coordinate departure, Coordinate arrival) {
 		LabyrinthGenerator labGenerator = new LabyrinthGenerator();
-		Integer keyDeparture = labGenerator.coordinatesToKey(departure, this.graph.getSize());
-		Integer keyArrival = labGenerator.coordinatesToKey(arrival, this.graph.getSize());
+		Integer keyDeparture = labGenerator.coordinatesToKey(departure, this.size);
+		Integer keyArrival = labGenerator.coordinatesToKey(arrival, this.size);
+		System.out.println("key depart : " + keyDeparture);
+		System.out.println("key arrive : " + keyArrival);
 		
 		return this.graph.getSuccessors(keyDeparture).contains(keyArrival);
 	}
@@ -86,5 +89,22 @@ public class Labyrinth implements Serializable {
 	 */
 	public Coordinate getArrival() {
 		return arrival;
+	}
+	
+	public Coordinate getNextSquareFromOrder(String order, Coordinate actualPosition) {
+		
+		switch(order) {
+			case "HAUT":
+				return new Coordinate(actualPosition.getX(), Math.max(actualPosition.getY() - 1, 0));
+
+			case "BAS":
+				return new Coordinate(actualPosition.getX(), Math.min(actualPosition.getY() + 1, this.getSize()-1));
+			case "GAUCHE":
+				return new Coordinate(Math.max(0, actualPosition.getX() - 1), actualPosition.getY());
+				
+			case "DROITE":
+				return new Coordinate(Math.min(this.getSize()-1, actualPosition.getX() + 1), actualPosition.getY());
+		}
+		return null;
 	}
 }

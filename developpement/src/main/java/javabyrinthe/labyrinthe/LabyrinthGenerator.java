@@ -29,7 +29,7 @@ public class LabyrinthGenerator implements Serializable{
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(filePath));
 			Integer nbEdges = Integer.parseInt(reader.readLine());
-			System.out.println("nb edges : " + nbEdges);
+//			System.out.println("nb edges : " + nbEdges);
 			String firstLine = reader.readLine().toString();
 			String[] result = firstLine.split(" ");
 			String graphName = result[1];
@@ -42,7 +42,8 @@ public class LabyrinthGenerator implements Serializable{
 				graph.addEdge(Integer.parseInt(keys[0]), Integer.parseInt(keys[1]), 1);
 			}
 			reader.close();
-			return new Labyrinth(graph, new Coordinate(graph.getSize() / 2, graph.getSize() / 2), new Coordinate(0, 0)); // the departure is the center of the labyrinth
+//			System.out.println("size laby: " + graph.getSize());
+			return new Labyrinth(graph, new Coordinate((int)Math.sqrt(graph.getSize()) / 2, (int)Math.sqrt(graph.getSize()) / 2), new Coordinate(0, 0)); // the departure is the center of the labyrinth
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;

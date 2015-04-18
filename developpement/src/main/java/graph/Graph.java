@@ -27,7 +27,6 @@ public class Graph implements Serializable {
 		this.name = name;
 		this.nbEdge = nbEdge;
 		this.adjacence = new HashMap<Integer, ArrayList<Integer>>();
-		this.size = adjacence.size();
 	}
 	
 	/**
@@ -55,6 +54,7 @@ public class Graph implements Serializable {
 	 */
 	public void addNode(Integer key) {
 		this.adjacence.put(key, new ArrayList<Integer>());
+		this.setSize();
 	}
 	
 	/**
@@ -100,5 +100,9 @@ public class Graph implements Serializable {
 		    System.out.println("key : " + clef + ", Successors : " +
 		    		getSuccessors(clef).toString());
 		}
+	}
+	
+	private void setSize() {
+		this.size = this.adjacence.size();
 	}
 }

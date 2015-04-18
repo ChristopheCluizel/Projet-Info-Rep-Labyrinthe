@@ -18,4 +18,4 @@ cp $cheminClasses/javabyrinthe/labyrinthe/*.class $cheminClasses/javabyrinthe/rm
 cp $cheminClasses/javabyrinthe/tools/*.class $cheminClasses/javabyrinthe/rmi/client
 
 
-cp $cheminClasses/javabyrinthe/serveur/PartieRunner.class $cheminClasses/javabyrinthe/rmi/serveur
+#cp $cheminClasses/javabyrinthe/serveur/PartieRunner.class $cheminClasses/javabyrinthe/rmi/serveur

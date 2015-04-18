@@ -1,16 +1,17 @@
 package javabyrinthe.jeu;
 
+import java.rmi.RemoteException;
 import java.util.*;
 import java.io.*;
 import java.lang.Runtime;
 
-public class JoueurIA implements Joueur {
+public class JoueurIA extends JoueurImpl {
 	public String pseudo;
 	public int x;
 	public int y;
 	public Process processusAssocie;
 	
-	public JoueurIA(String pseudo, String code) {
+	public JoueurIA(String pseudo, String code) throws RemoteException {
 		this.pseudo = pseudo;
 		this.x=0;
 		this.y=0;
