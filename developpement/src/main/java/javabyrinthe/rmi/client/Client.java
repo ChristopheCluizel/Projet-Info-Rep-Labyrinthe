@@ -15,25 +15,32 @@ public class Client {
   public static void main(String args[]) {
     String machine = "localhost";
     int port = 1099;
+    int nbJoueurMaxParPartie = 2;
 
     try {
         Joueur stub = (Joueur)UnicastRemoteObject.exportObject(new JoueurImpl(),0);
         Registry registry = LocateRegistry.getRegistry(machine, port);
-        String id = UUID.randomUUID().toString();
-        if(!Arrays.asList(registry.list()).contains(id))
-            registry.bind(id, stub);
+        String stringIdClient = UUID.randomUUID().toString();
+        if(!Arrays.asList(registry.list()).contains(stringIdClient))
+            registry.bind(stringIdClient, stub);
         else
-            registry.rebind(id, stub);
-        System.out.println("Service "+id+" lié au registre");
+            registry.rebind(stringIdClient, stub);
+        System.out.println("Service " + stringIdClient + " lié au registre");
 
         PartieManager partieManager = (PartieManager)registry.lookup("PartieManager");
         Partie partie;
         if(args[0].contains("C"))
-            partie = partieManager.creerPartie(id,2);
+        	if(args[1].contains("H"))
+        		partie = partieManager.creerPartie(stringIdClient, "christophe", "humain", nbJoueurMaxParPartie);
+        	else
+        		partie = partieManager.creerPartie(stringIdClient, "christopheIA", "IA", nbJoueurMaxParPartie);
         else if(args[0].contains("R"))
-            partie = partieManager.rejoindrePartie(id);
+        	if(args[1].contains("H"))
+        		partie = partieManager.rejoindrePartie(stringIdClient, "christophe", "humain");
+        	else
+        		partie = partieManager.rejoindrePartie(stringIdClient, "christopheIA", "IA");
     } catch (Exception e) {
-       System.out.println("Client exception: " +e);
+       System.out.println("Client exception: " + e);
     }
   }
 }

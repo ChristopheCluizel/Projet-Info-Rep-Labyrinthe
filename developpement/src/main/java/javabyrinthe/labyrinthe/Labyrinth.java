@@ -46,8 +46,7 @@ public class Labyrinth implements Serializable {
 		LabyrinthGenerator labGenerator = new LabyrinthGenerator();
 		Integer keyDeparture = labGenerator.coordinatesToKey(departure, this.size);
 		Integer keyArrival = labGenerator.coordinatesToKey(arrival, this.size);
-		System.out.println("key depart : " + keyDeparture);
-		System.out.println("key arrive : " + keyArrival);
+		System.out.println("Déplacement: " + keyDeparture + " -> " + keyArrival);
 		
 		return this.graph.getSuccessors(keyDeparture).contains(keyArrival);
 	}

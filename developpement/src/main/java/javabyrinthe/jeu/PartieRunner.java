@@ -11,13 +11,14 @@ public class PartieRunner implements  Runnable {
   }
   public void run(){
     while(partie.getnbTour() < partie.getnbTourMax()){
-      System.out.println("partie"+partie + " "+ partie.getnbTour() +"/"+partie.getnbTourMax());
+    	System.out.println();
+      System.out.println("Partie "+ partie + " en cours. Etat nombre de tours : "+ partie.getnbTour() + "/" + partie.getnbTourMax());
       try{
           partie.tourSuivant();
         }catch(Exception e){
           System.out.println("/!\\PartieRunner : " + e);
         }
     }
-    System.out.println("Partie Fini" + partie);
+    System.out.println("Fin de partie" + partie);
   }
 }

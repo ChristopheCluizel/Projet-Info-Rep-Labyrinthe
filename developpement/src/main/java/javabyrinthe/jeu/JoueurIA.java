@@ -6,15 +6,9 @@ import java.io.*;
 import java.lang.Runtime;
 
 public class JoueurIA extends JoueurImpl {
-	public String pseudo;
-	public int x;
-	public int y;
 	public Process processusAssocie;
 	
 	public JoueurIA(String pseudo, String code) throws RemoteException {
-		this.pseudo = pseudo;
-		this.x=0;
-		this.y=0;
 		
 		try {
 		// Création du fichier contenant le programme de l'IA

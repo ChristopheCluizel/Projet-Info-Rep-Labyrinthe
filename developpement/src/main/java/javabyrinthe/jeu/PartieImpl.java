@@ -23,8 +23,10 @@ public class PartieImpl implements Partie, Remote {
 	   this.joueurList = new ArrayList<Joueur>();
 	   try {
 		   this.labyrinth = new LabyrinthGenerator().loadLabyrinth("graph1.dot");
-		   System.out.println("departure:" + new LabyrinthGenerator().coordinatesToKey(this.labyrinth.getDeparture(), this.labyrinth.getSize()));
-		   System.out.println("arrival:" + new LabyrinthGenerator().coordinatesToKey(this.labyrinth.getArrival(), this.labyrinth.getSize()));
+		   System.out.println("######### Labyrinthe chargé ##########");
+		   System.out.println("Key departure: " + new LabyrinthGenerator().coordinatesToKey(this.labyrinth.getDeparture(), this.labyrinth.getSize()));
+		   System.out.println("Key arrival: " + new LabyrinthGenerator().coordinatesToKey(this.labyrinth.getArrival(), this.labyrinth.getSize()));
+		   System.out.println("######################################");
 	   } catch (FileNotFoundException e) {
 		   e.printStackTrace();
 	   }
@@ -42,10 +44,10 @@ public class PartieImpl implements Partie, Remote {
 			   Coordinate nextPosition = this.labyrinth.getNextSquareFromOrder(choixDeplacement, joueur.getActualPosition());
 			   if(this.labyrinth.isAuthorizedMove(joueur.getActualPosition(), nextPosition)) {
 				   joueur.setActualPosition(nextPosition);
-				   System.out.println("tour:" + this.nbTour + " déplacement: " + choixDeplacement);
+				   System.out.println("Tour " + this.nbTour + " -> déplacement vers " + choixDeplacement + " effectué.");
 			   }
 			   else {
-				   System.out.println("tour:" + this.nbTour + " déplacement: " + choixDeplacement + " impossible !");
+				   System.out.println("Tour " + this.nbTour + " -> déplacement vers " + choixDeplacement + " impossible !");
 			   }
 			   
 		   }catch(Exception e){
@@ -58,7 +60,6 @@ public class PartieImpl implements Partie, Remote {
 	   joueur.setActualPosition(this.labyrinth.getDeparture());
 	   this.joueurList.add(joueur);
 	   this.nbJoueur++;
-	   System.out.println(this.nbJoueur + "/" + this.nbJoueurMax);
    }
 
    public int getnbJoueurMax(){
