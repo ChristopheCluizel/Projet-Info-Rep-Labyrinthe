@@ -15,7 +15,7 @@ public class modele {
 	
 	// Emplacement de la fonction écrite par le joueur pour son IA
 	// Exemple :
-	 public static String choisirDirection() {
+	 public static String choisirDirection(String parametres) {
 	 		return "haut"; // ou "bas", "droite", "gauche"
 	 }
 	

@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public interface PartieManager extends Remote, Serializable {
  // public PartieManager() throws RemoteException;
-  public boolean creerJoueurIA (String idClient, String pseudo, String codeIA) throws RemoteException;
+  public boolean creerJoueurIA (String idClient, String pseudo, String codeIA) throws RemoteException, CompilationFailedException ;
   public Partie creerPartie(String clientId, String pseudo, String mode, int nbJoueurMax) throws RemoteException;
   public Partie rejoindrePartie(String clientId, String pseudo, String mode) throws RemoteException;
 }

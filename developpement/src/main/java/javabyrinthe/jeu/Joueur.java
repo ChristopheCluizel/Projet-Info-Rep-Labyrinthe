@@ -11,6 +11,14 @@ public abstract class Joueur implements JoueurInterface, Remote {
 	
 	String pseudo = "";
 	Coordinate actualPosition;
+	Partie partieEnCours;
+	
+	
+	public Joueur(String pseudo) throws RemoteException {
+		this.setPseudo(pseudo);
+		this.actualPosition = null;
+		this.partieEnCours = null;
+	}
 	
 	/** 
 	 * Ask a player to play by entering his move order
@@ -53,5 +61,13 @@ public abstract class Joueur implements JoueurInterface, Remote {
 	 */
 	public String getPseudo() throws RemoteException {
 		return this.pseudo;
+	}
+	
+	public void setPartie(Partie partie) throws RemoteException {
+		this.partieEnCours = partie;
+	}
+	
+	public Partie getPartie() throws RemoteException {
+		return this.partieEnCours;
 	}
 }

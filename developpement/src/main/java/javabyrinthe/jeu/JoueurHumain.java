@@ -5,6 +5,10 @@ import java.util.Scanner;
 
 public class JoueurHumain extends Joueur {
 
+	public JoueurHumain(String pseudo) throws RemoteException {
+		super(pseudo);
+	}
+
 	@Override
 	public String jouer() throws RemoteException {
 		System.out.println("A ton tour de jouer. Ta position actuelle : " + actualPosition.toString());

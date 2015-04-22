@@ -18,7 +18,7 @@ public class Client {
     int nbJoueurMaxParPartie = 2;
 
     try {
-        JoueurInterface stub = (JoueurInterface)UnicastRemoteObject.exportObject(new JoueurHumain(),0);
+        JoueurInterface stub = (JoueurInterface)UnicastRemoteObject.exportObject(new JoueurHumain("bob"),0);
         Registry registry = LocateRegistry.getRegistry(machine, port);
         String stringIdClient = UUID.randomUUID().toString();
         if(!Arrays.asList(registry.list()).contains(stringIdClient))
