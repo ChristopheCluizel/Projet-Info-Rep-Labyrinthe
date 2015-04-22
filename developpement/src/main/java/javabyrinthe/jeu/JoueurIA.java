@@ -5,7 +5,7 @@ import java.util.*;
 import java.io.*;
 import java.lang.Runtime;
 
-public class JoueurIA extends JoueurImpl {
+public class JoueurIA extends Joueur {
 	public Process processusAssocie;
 	
 	public JoueurIA(String pseudo, String code) throws RemoteException {
@@ -34,6 +34,7 @@ public class JoueurIA extends JoueurImpl {
 		} catch (IOException e) {e.printStackTrace();} // A GERER !!!!!!
 	}
 	
+	@Override
 	public String jouer() {
 	// help : http://ydisanto.developpez.com/tutoriels/java/runtime-exec/
 	// http://labs.excilys.com/2012./06/26/runtime-exec-pour-les-nuls-et-processbuilder/

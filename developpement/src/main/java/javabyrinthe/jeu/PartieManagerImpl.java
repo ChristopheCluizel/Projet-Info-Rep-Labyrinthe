@@ -8,7 +8,7 @@ import java.util.*;
 
 public class PartieManagerImpl implements PartieManager, Remote {
 	ArrayList<Partie> partieList;
-	HashMap<String, Joueur> joueurIAList;
+	HashMap<String, JoueurInterface> joueurIAList;
 	String machine = "localhost";
 	int port = 1099;
 	Registry registry;
@@ -16,21 +16,21 @@ public class PartieManagerImpl implements PartieManager, Remote {
 	public PartieManagerImpl() throws RemoteException{
 		registry = LocateRegistry.getRegistry(machine, port);
 		partieList = new ArrayList<Partie>();
-		joueurIAList = new HashMap<String, Joueur>();
+		joueurIAList = new HashMap<String, JoueurInterface>();
 	}
 	
 	public boolean creerJoueurIA(String stringIdClient, String pseudo, String codeIA) throws RemoteException {
-		Joueur joueurIA = new JoueurIA(pseudo, codeIA);
+		JoueurInterface joueurIA = new JoueurIA(pseudo, codeIA);
 		joueurIAList.put(stringIdClient, joueurIA);
 		return joueurIAList.containsKey(stringIdClient);
 	}
 	
-	private Joueur getJoueurFromIdClient(String stringIdClient) {
+	private JoueurInterface getJoueurFromIdClient(String stringIdClient) {
 		try {
 			if (joueurIAList.containsKey(stringIdClient)) {
 				return joueurIAList.get(stringIdClient);
 			} else {
-	        	return (Joueur)registry.lookup(stringIdClient);
+	        	return (JoueurInterface)registry.lookup(stringIdClient);
 	        }
 	    } catch (Exception e) {
       		System.out.println(e);
@@ -43,7 +43,7 @@ public class PartieManagerImpl implements PartieManager, Remote {
 			Partie nouvellePartie = new PartieImpl(nbJoueurMax);
 			partieList.add(nouvellePartie);
 			System.out.println("Nouvelle partie ("+ nouvellePartie + ")");
-			Joueur joueur = (Joueur)getJoueurFromIdClient(clientId);
+			JoueurInterface joueur = (JoueurInterface)getJoueurFromIdClient(clientId);
 			joueur.setPseudo(pseudo);
 			nouvellePartie.addJoueur(joueur);
 		   System.out.println("Ajout d'un joueur dans la partie "+ nouvellePartie + ". Etat nombre joueurs: "+ nouvellePartie.getnbJoueur()  + "/" + nouvellePartie.getnbJoueurMax());
@@ -56,7 +56,7 @@ public class PartieManagerImpl implements PartieManager, Remote {
 
 	public Partie rejoindrePartie(String clientId, String pseudo, String mode) throws RemoteException {
 		try {
-			Joueur joueur = (Joueur)registry.lookup(clientId);
+			JoueurInterface joueur = (JoueurInterface)registry.lookup(clientId);
 			joueur.setPseudo(pseudo);
 	        Partie choosenPartie = null;
 	        for(Partie partie : partieList){
