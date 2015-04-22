@@ -16,11 +16,11 @@ public class PartieImpl implements Partie, Remote {
    int nbTour = 0;
   
    Labyrinth labyrinth;
-   ArrayList<Joueur> joueurList;
+   ArrayList<JoueurInterface> joueurList;
 
    public PartieImpl(int nbJoueurMax) throws RemoteException{
 	   this.nbJoueurMax = nbJoueurMax;
-	   this.joueurList = new ArrayList<Joueur>();
+	   this.joueurList = new ArrayList<JoueurInterface>();
 	   try {
 		   this.labyrinth = new LabyrinthGenerator().loadLabyrinth("graph1.dot");
 		   this.labyrinth.setArrival(new Coordinate(3, 2)); // for debug only (to shorten the path to arrival) !!!!!
@@ -39,7 +39,7 @@ public class PartieImpl implements Partie, Remote {
 
    public String tourSuivant() throws RemoteException {
 	   this.nbTour++;
-	   for(Joueur joueur : this.joueurList){
+	   for(JoueurInterface joueur : this.joueurList){
 		   try{
 			   String choixDeplacement = joueur.jouer();
 			   Coordinate nextPosition = this.labyrinth.getNextSquareFromOrder(choixDeplacement, joueur.getActualPosition());
@@ -62,7 +62,7 @@ public class PartieImpl implements Partie, Remote {
 	   return "";
    }
 
-   public void addJoueur(Joueur joueur) throws RemoteException {
+   public void addJoueur(JoueurInterface joueur) throws RemoteException {
 	   joueur.setActualPosition(this.labyrinth.getDeparture());
 	   this.joueurList.add(joueur);
 	   this.nbJoueur++;

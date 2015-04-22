@@ -6,8 +6,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Arrays;
 import java.util.UUID;
 
-import javabyrinthe.jeu.Joueur;
-import javabyrinthe.jeu.JoueurImpl;
+import javabyrinthe.jeu.JoueurHumain;
+import javabyrinthe.jeu.JoueurInterface;
 import javabyrinthe.jeu.Partie;
 import javabyrinthe.jeu.PartieManager;
 
@@ -18,7 +18,7 @@ public class Client {
     int nbJoueurMaxParPartie = 2;
 
     try {
-        Joueur stub = (Joueur)UnicastRemoteObject.exportObject(new JoueurImpl(),0);
+        JoueurInterface stub = (JoueurInterface)UnicastRemoteObject.exportObject(new JoueurHumain(),0);
         Registry registry = LocateRegistry.getRegistry(machine, port);
         String stringIdClient = UUID.randomUUID().toString();
         if(!Arrays.asList(registry.list()).contains(stringIdClient))
