@@ -23,8 +23,6 @@ public class IHM extends StateBasedGame{
     }
 
     public static void main(String[] args) throws SlickException{
-    	System.setProperty("java.library.path","lib");
-    	System.setProperty("org.lwjgl.librarypath",new File("lib/nativeOSX").getAbsolutePath());
         try{
             AppGameContainer container = new AppGameContainer(new IHM());
             container.setDisplayMode(600,600,false);
