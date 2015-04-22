@@ -1,1 +1,1 @@
-swallon$ java -cp target/scala-2.10/classes/:lib/* -Djava.library.path=lib/native/ javabyrinthe.ihm.IHM
+java -cp target/scala-2.10/classes/:lib/* -Djava.library.path=lib/native/ javabyrinthe.ihm.IHM
