@@ -1,4 +1,4 @@
-rm -rf target
+#rm -rf target
 mkdir -p target/scala-2.10/classes
 javac -d ./target/scala-2.10/classes/ -cp ./target/scala-2.10/classes/:./lib/* -sourcepath src/main/java/ src/main/java/javabyrinthe/ihm/*.java
 javac -d ./target/scala-2.10/classes/ -cp ./target/scala-2.10/classes/:./lib/* -sourcepath src/main/java/ src/main/java/javabyrinthe/jeu/*.java
