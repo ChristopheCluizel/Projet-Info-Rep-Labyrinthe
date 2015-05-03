@@ -17,5 +17,4 @@ cp $cheminClasses/javabyrinthe/jeu/*.class $cheminClasses/javabyrinthe/rmi/clien
 cp $cheminClasses/javabyrinthe/labyrinthe/*.class $cheminClasses/javabyrinthe/rmi/client
 cp $cheminClasses/javabyrinthe/tools/*.class $cheminClasses/javabyrinthe/rmi/client
 
-
-#cp $cheminClasses/javabyrinthe/serveur/PartieRunner.class $cheminClasses/javabyrinthe/rmi/serveur
+cp /home/christophe/Bureau/projet_info_rep/developpement/src/main/resources/graph1.dot /home/christophe/Bureau/projet_info_rep/developpement/target/scala-2.10/classes
