@@ -1,49 +1,21 @@
 package javabyrinthe;
 
-import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.rmi.RemoteException;
 
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
+import javabyrinthe.jeu.CompilationFailedException;
+import javabyrinthe.jeu.JoueurIA;
 
-public class MainClass extends BasicGame
-{
-	public MainClass(String gamename)
-	{
-		super(gamename);
-	}
+public class MainClass {
 
-	@Override
-	public void init(GameContainer gc) throws SlickException {}
-
-	@Override
-	public void update(GameContainer gc, int i) throws SlickException {}
-
-	@Override
-	public void render(GameContainer gc, Graphics g) throws SlickException
-	{
-		g.drawString("Howdy!", 10, 10);
-	}
-
-	public static void main(String[] args)
-	{
-		System.setProperty("java.library.path", "lib");
-		System.setProperty("org.lwjgl.librarypath", new File("lib/native").getAbsolutePath());
-		
-		try
-		{
-			AppGameContainer appgc;
-			appgc = new AppGameContainer(new MainClass("Simple Slick Game"));
-			appgc.setDisplayMode(640, 480, false);
-			appgc.start();
-		}
-		catch (SlickException ex)
-		{
-			Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
+	public static void main(String[] args) {
+		String code = "";
+		try {
+			JoueurIA ia = new JoueurIA("christophe", code);
+			ia.init();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		} catch (CompilationFailedException e) {
+			e.printStackTrace();
 		}
 	}
 }

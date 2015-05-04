@@ -1,9 +1,11 @@
 package javabyrinthe.jeu;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
-import java.util.*;
-import java.io.*;
-import java.lang.Runtime;
 
 public class JoueurIA extends Joueur {
 	public String code;
@@ -23,14 +25,14 @@ public class JoueurIA extends Joueur {
 		try {
 			// Compilation du programme de l'IA
 			final ProcessBuilder pb = new ProcessBuilder("/bin/bash","buildIA.sh", nomFichier, code);
-			pb.directory(new File("../../../resources"));
+			pb.directory(new File("src/main/resources/"));
 			Process processusCompilation = pb.start();
 	
 			// Vérification que la compilation c'est bien passée
 			BufferedReader output = new BufferedReader(new InputStreamReader(processusCompilation.getInputStream()));
 			resCompilation = output.readLine();
+			System.out.println("resCompilation: " + resCompilation);
 			output.close();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -39,11 +41,12 @@ public class JoueurIA extends Joueur {
 			try {
 				// Démarrage du programme de l'IA
 				final ProcessBuilder pb2 = new ProcessBuilder("/bin/bash","execIA.sh", nomFichier);
-				pb2.directory(new File("../../../resources"));
+				pb2.directory(new File("src/main/resources/"));
 				processusAssocie = pb2.start();
 				// Récupération des flux pour le dialogue
 				this.litReponse = new BufferedReader(new InputStreamReader(processusAssocie.getInputStream()));
 				this.envoiParam = new BufferedWriter(new OutputStreamWriter(processusAssocie.getOutputStream()));
+				System.out.println("litReponse: " + this.litReponse.readLine());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}		
@@ -62,7 +65,7 @@ public class JoueurIA extends Joueur {
 			envoiParam.flush();
 			reponse = litReponse.readLine();
 		} catch (Exception e) {
-				e.printStackTrace();
+			e.printStackTrace();
 		}
 		return reponse; // retourne ce que le programme de l'IA affiche
 	}
