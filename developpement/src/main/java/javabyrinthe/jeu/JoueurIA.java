@@ -46,7 +46,12 @@ public class JoueurIA extends Joueur {
 			// Récupération des flux pour le dialogue
 			this.streamReponse = new BufferedReader(new InputStreamReader(processusAssocie.getInputStream()));
 			this.streamEnvoi = new BufferedWriter(new OutputStreamWriter(processusAssocie.getOutputStream()));
-		} catch (Exception e) {
+		} 
+		catch (CompilationFailedException e) {
+			throw e;
+		} 
+		catch (Exception e) {
+			System.out.println("pouet#chrichri");
 			e.printStackTrace();
 		}		
 		
@@ -69,7 +74,7 @@ public class JoueurIA extends Joueur {
 			streamEnvoi.newLine();
 			streamEnvoi.flush();
 			System.out.println("Attente de réponse...");
-			reponse = streamReponse.readLine();//!\\ le programme n' l'air de pas recevoir l'écriture
+			reponse = streamReponse.readLine();
 			if(reponse == null)
 				reponse = "";
 			System.out.println(reponse);
