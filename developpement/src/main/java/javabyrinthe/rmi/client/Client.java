@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.UUID;
 
 import javabyrinthe.jeu.JoueurHumain;
+import javabyrinthe.jeu.JoueurIA;
 import javabyrinthe.jeu.JoueurInterface;
 import javabyrinthe.jeu.Partie;
 import javabyrinthe.jeu.PartieManager;
@@ -18,7 +19,14 @@ public class Client {
     int nbJoueurMaxParPartie = 2;
 
     try {
-        JoueurInterface stub = (JoueurInterface)UnicastRemoteObject.exportObject(new JoueurHumain("bob"),0);
+        // création du joueur
+        JoueurInterface stub ;
+        if(args[1].contains("H"))
+            stub = (JoueurInterface)UnicastRemoteObject.exportObject(new JoueurHumain("bob"),0);
+        else
+            stub = (JoueurInterface)UnicastRemoteObject.exportObject(new JoueurIA("bob"),0);
+        
+        // ajout du joueur au registre
         Registry registry = LocateRegistry.getRegistry(machine, port);
         String stringIdClient = UUID.randomUUID().toString();
         if(!Arrays.asList(registry.list()).contains(stringIdClient))
@@ -27,6 +35,7 @@ public class Client {
             registry.rebind(stringIdClient, stub);
         System.out.println("Service " + stringIdClient + " lié au registre");
 
+        // recupération du partie manager et entrée dans une parite
         PartieManager partieManager = (PartieManager)registry.lookup("PartieManager");
         Partie partie;
         if(args[0].contains("C"))

@@ -9,61 +9,68 @@ import java.rmi.RemoteException;
 
 public class JoueurIA extends Joueur {
 	public String code;
+	public String nomFichier = "MainJoueur";
 	public Process processusAssocie;
-	public BufferedWriter envoiParam;
-	public BufferedReader litReponse;
+	public BufferedWriter streamEnvoi;
+	public BufferedReader streamReponse;
+	public Boolean running;
 	
-	public JoueurIA(String pseudo, String code) throws RemoteException, CompilationFailedException {
+	public JoueurIA(String pseudo) throws RemoteException, CompilationFailedException {
 		super(pseudo);
 		this.code = code;		
+		init();
 	}
 	
 	public void init() throws CompilationFailedException {
 		String resCompilation = "";
-		String nomFichier = pseudo; // A CHANGER ????
+		String errorCompilation = "";
 		
 		try {
 			// Compilation du programme de l'IA
-			final ProcessBuilder pb = new ProcessBuilder("/bin/bash","buildIA.sh", nomFichier, code);
-			pb.directory(new File("src/main/resources/"));
+			final ProcessBuilder pb = new ProcessBuilder("javac",nomFichier+".java");
 			Process processusCompilation = pb.start();
 	
 			// Vérification que la compilation c'est bien passée
-			BufferedReader output = new BufferedReader(new InputStreamReader(processusCompilation.getInputStream()));
-			resCompilation = output.readLine();
-			System.out.println("resCompilation: " + resCompilation);
-			output.close();
+			BufferedReader error = new BufferedReader(new InputStreamReader(processusCompilation.getErrorStream()));
+			errorCompilation = error.readLine();
+			if(errorCompilation != null)
+			{
+				running = false;
+				throw new CompilationFailedException(errorCompilation);
+			}
+		
+			// Démarrage du programme de l'IA
+			final ProcessBuilder pb2 = new ProcessBuilder("java", nomFichier);
+			processusAssocie = pb2.start();
+			running = true;
+			// Récupération des flux pour le dialogue
+			this.streamReponse = new BufferedReader(new InputStreamReader(processusAssocie.getInputStream()));
+			this.streamEnvoi = new BufferedWriter(new OutputStreamWriter(processusAssocie.getOutputStream()));
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}		
 		
-		if (resCompilation.equals("Compilation OK")) {
-			try {
-				// Démarrage du programme de l'IA
-				final ProcessBuilder pb2 = new ProcessBuilder("/bin/bash","execIA.sh", nomFichier);
-				pb2.directory(new File("src/main/resources/"));
-				processusAssocie = pb2.start();
-				// Récupération des flux pour le dialogue
-				this.litReponse = new BufferedReader(new InputStreamReader(processusAssocie.getInputStream()));
-				this.envoiParam = new BufferedWriter(new OutputStreamWriter(processusAssocie.getOutputStream()));
-				System.out.println("litReponse: " + this.litReponse.readLine());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}		
-		} else {
-			throw new CompilationFailedException();
-		}
 	}
 	
 
-	public String jouer() {
+	public String jouer() throws RemoteException {
 	// help : http://ydisanto.developpez.com/tutoriels/java/runtime-exec/
 	// http://labs.excilys.com/2012./06/26/runtime-exec-pour-les-nuls-et-processbuilder/
+		if(!running)
+		{ 
+			System.out.println("L'IA ne tourne pas.");
+			return "";
+		}
+		System.out.println("A l'IA de jouer. Sa position actuelle : " + actualPosition.toString());
 		String reponse = "";
 		try {
-			envoiParam.write(partieEnCours.getLabyrinthe().toString()); // on envoie les paramètres nécessaires pour exécuter la méthode choisirDirection écrite par le joueur
-			envoiParam.flush();
-			reponse = litReponse.readLine();
+			streamEnvoi.write("hello\n");//partieEnCours.getLabyrinthe().toString()); // on envoie les paramètres nécessaires pour exécuter la méthode choisirDirection écrite par le joueur
+			streamEnvoi.newLine();
+			System.out.println("Attente de réponse...");
+			reponse = streamReponse.readLine();//!\\ le programme n' l'air de pas recevoir l'écriture
+			if(reponse == null)
+				reponse = "";
+			System.out.println(reponse);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

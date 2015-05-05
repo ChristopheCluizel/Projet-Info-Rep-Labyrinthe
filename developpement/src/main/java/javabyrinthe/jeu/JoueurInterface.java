@@ -12,4 +12,6 @@ public interface JoueurInterface extends Remote, Serializable {
   public String getPseudo() throws RemoteException;
   public Coordinate getActualPosition() throws RemoteException;
   public void setActualPosition(Coordinate actualPosition) throws RemoteException;
+  public void setPartie(Partie partie) throws RemoteException;
+  public Partie getPartie() throws RemoteException;
 }

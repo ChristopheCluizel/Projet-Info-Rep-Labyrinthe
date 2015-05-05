@@ -19,12 +19,6 @@ public class PartieManagerImpl implements PartieManager, Remote {
 		joueurIAList = new HashMap<String, JoueurInterface>();
 	}
 	
-	public boolean creerJoueurIA(String stringIdClient, String pseudo, String codeIA) throws RemoteException, CompilationFailedException {
-		JoueurInterface joueurIA = new JoueurIA(pseudo, codeIA);
-		joueurIAList.put(stringIdClient, joueurIA);
-		return joueurIAList.containsKey(stringIdClient);
-	}
-	
 	private JoueurInterface getJoueurFromIdClient(String stringIdClient) {
 		try {
 			if (joueurIAList.containsKey(stringIdClient)) {
