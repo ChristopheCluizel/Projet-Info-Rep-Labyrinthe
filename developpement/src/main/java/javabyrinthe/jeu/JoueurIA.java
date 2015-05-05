@@ -64,8 +64,10 @@ public class JoueurIA extends Joueur {
 		System.out.println("A l'IA de jouer. Sa position actuelle : " + actualPosition.toString());
 		String reponse = "";
 		try {
-			streamEnvoi.write("hello\n");//partieEnCours.getLabyrinthe().toString()); // on envoie les paramètres nécessaires pour exécuter la méthode choisirDirection écrite par le joueur
+			streamEnvoi.flush();
+			streamEnvoi.write("hello\r\n");//partieEnCours.getLabyrinthe().toString()); // on envoie les paramètres nécessaires pour exécuter la méthode choisirDirection écrite par le joueur
 			streamEnvoi.newLine();
+			streamEnvoi.flush();
 			System.out.println("Attente de réponse...");
 			reponse = streamReponse.readLine();//!\\ le programme n' l'air de pas recevoir l'écriture
 			if(reponse == null)

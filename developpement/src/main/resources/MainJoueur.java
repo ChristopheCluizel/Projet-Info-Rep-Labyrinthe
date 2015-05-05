@@ -7,8 +7,6 @@ public class MainJoueur {
 		Scanner sc = new Scanner(System.in);
 		String entree, deplacement;
 		while(true) {
-			deplacement = choisirDirection(); // exécute la fonction écrite par le joueur
-			System.out.println(deplacement);
 			entree = sc.nextLine(); // lit l'entrée standard
 			deplacement = choisirDirection(); // exécute la fonction écrite par le joueur
 			System.out.println(deplacement); // affiche la direction souhaitée
