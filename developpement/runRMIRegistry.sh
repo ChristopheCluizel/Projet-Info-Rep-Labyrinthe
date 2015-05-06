@@ -1,2 +1,2 @@
-cd target/scala-2.10/classes/
+cd target/scala-2.11/classes/
 rmiregistry
