@@ -8,11 +8,11 @@ import java.io.OutputStreamWriter;
 import java.rmi.RemoteException;
 
 public class JoueurIA extends Joueur {
-	public String nomFichier = "MainJoueur";
-	public Process processusAssocie;
-	public BufferedWriter streamEnvoi;
-	public BufferedReader streamReponse;
-	public Boolean running;
+	String nomFichier = "MainJoueur";
+	Process processusAssocie;
+	BufferedWriter streamEnvoi;
+	BufferedReader streamReponse;
+	Boolean running;
 
 	public JoueurIA(String pseudo) throws RemoteException, CompilationFailedException {
 		super(pseudo);
@@ -29,8 +29,7 @@ public class JoueurIA extends Joueur {
 			Process processusCompilation = pb.start();
 
 			// Vérification que la compilation c'est bien passée
-			BufferedReader error = new BufferedReader(new InputStreamReader(
-					processusCompilation.getErrorStream()));
+			BufferedReader error = new BufferedReader(new InputStreamReader(processusCompilation.getErrorStream()));
 			errorCompilation = error.readLine();
 			if (errorCompilation != null) {
 				running = false;
@@ -43,10 +42,8 @@ public class JoueurIA extends Joueur {
 			processusAssocie = pb2.start();
 			running = true;
 			// Récupération des flux pour le dialogue
-			this.streamReponse = new BufferedReader(new InputStreamReader(
-					processusAssocie.getInputStream()));
-			this.streamEnvoi = new BufferedWriter(new OutputStreamWriter(
-					processusAssocie.getOutputStream()));
+			this.streamReponse = new BufferedReader(new InputStreamReader(processusAssocie.getInputStream()));
+			this.streamEnvoi = new BufferedWriter(new OutputStreamWriter(processusAssocie.getOutputStream()));
 		} catch (CompilationFailedException e) {
 			throw e;
 		} catch (Exception e) {

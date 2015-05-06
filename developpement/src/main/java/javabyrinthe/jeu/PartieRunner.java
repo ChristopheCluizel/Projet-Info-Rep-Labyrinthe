@@ -26,7 +26,6 @@ public class PartieRunner implements  Runnable {
 			System.out.println("Partie "+ partie + " en cours. Etat nombre de tours : "+ partie.getnbTour() + "/" + partie.getnbTourMax());
 			try{
 				String gagnant = partie.tourSuivant();
-				System.out.println("gagnant: " + gagnant);
 				if(!gagnant.isEmpty()) {
 					lancerFinDePartie(gagnant);
 					break;
