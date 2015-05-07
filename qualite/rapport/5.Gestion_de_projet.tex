@@ -1,0 +1,24 @@
+% ============= Gestion des documents =============
+\section{Gestion des documents}
+    Notre équipe de projet était composée de six membres. Nous avons donc dû mettre en place un système de gestion de documents partagés (textes et code source) et de versionnage. Nous avons choisi Git et la plate-forme Github pour cela. \\
+
+    La communication au sein du groupe s'est faite par mail, sms et de vive voix. De plus, l'historique de Git permettait de connaître l'avancement sur le projet de chacun.
+
+
+% ============= Répartition des rôles =============
+\section{Répartition des rôles}
+    La spécification a été réalisée à l'aide de l'équipe au complet. Alexandre Brehmer a proposé un début de conception, sur laquelle nous avons tous discuté afin d'apporter des critiques et améliorations. Ces deux phases étant cruciales, toute l'équipe a dû participer. \\
+
+    Une fois la première version de la conception terminée, nous avons pu découper l'implémentation du code en plusieurs tâches. La répartition entre les membres du groupe s'est faite ainsi:
+
+    \paragraph{Alexandre Brehmer} Alexandre a implémenté toute la base de l'architecture RMI\@. Cette base a servi de structure pour la suite de l'implémentation. De plus, pendant toute la phase de programmation, il a fait en sorte de faire fonctionner ensemble les différentes parties de la logique métier.
+
+    \paragraph{Christophe Cluizel} Christophe a implémenté toute la logique métier en lien avec le labyrinthe, à savoir le graphe, le labyrinthe et le générateur (qui a seulement le rôle de charger un labyrinthe à partir d'un fichier texte). De plus, comme Alexandre, il a fait en sorte de faire fonctionner la logique métier dans son ensemble. De façon parallèle au projet, Christophe a implémenté en Scala un outil permettant de générer des labyrinthes automatiquement (sérialisés ensuite en fichier texte). Ce sont ces fichiers textes que nous chargeons au sein de notre application.
+
+    \paragraph{Anthony Courtin} Avec l'aide de Simon, Anthony s'est occupé de l'interface utilisateur. Plus spécifiquement, il s'est chargé de l'interface du menu principal, puis de l'intégration de celui-ci au sein de l'application existante.
+
+    \paragraph{Céline Leduc \& Charlotte Touchard} Céline et Charlotte se sont occupées de l'implémentation de la gestion d'une IA potentiellement créée par l'utilisateur. En effet, une fois le code de l'IA récupérer, il faut pouvoir le compiler et l'exécuter sur chez le client.
+
+    \paragraph{Simon Wallon} Avec Anthony, Simon avait pour tâche de réaliser l'interface utilisateur. En particulier, il a implémenté l'interface ayant un lien avec la gestion du labyrinthe, à savoir l'affichage du labyrinthe et des différents joueurs et les interactions avec l'utilisateur en cours de partie. De plus, il s'est également occupé de l'intégration de l'interface utilisateur avec la logique métier.
+
+
