@@ -1,0 +1,45 @@
+\documentclass[handout]{beamer} %[handout] pour supprimer la barre de navigation mais \pause ne fonctionne pas dans ce mode
+\usepackage[frenchb]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+
+\usetheme{Frankfurt}
+
+\title[Javabyrinthe]{Javabyrinthe \\ Projet d'Informatique Répartie}
+\author{Alexandre Brehmer \and Christophe Cluizel  \and Anthony Courtin \and Céline Leduc \and Charlotte Touchard \and Simon Wallon}
+\institute{INSA Rouen}
+\date{\today}
+
+%ajoute la numérotation des pages et nombre pages total
+\addtobeamertemplate{footline}{\hfill\insertframenumber/\inserttotalframenumber\hspace{2em}\null}
+
+%indiquer le chemin du dossier des images
+\graphicspath{{}{image/}}
+
+\usepackage{array}
+\usepackage{url}
+\usepackage{hyperref}
+
+
+\begin{document}
+  \begin{frame}[plain]
+  \titlepage
+  \end{frame}
+
+  \AtBeginSection[]
+  {
+    \begin{frame}
+    \frametitle{Sommaire}
+    \tableofcontents[currentsection, hideothersubsections]
+
+    \end{frame}
+  }
+
+  \input{1.introduction.tex}
+  \input{2.choix_techniques.tex}
+  \input{3.problemes_solutions.tex}
+  \input{4.demonstation.tex}
+  \input{5.analyse_critique_ameliorations.tex}
+
+\end{document}
