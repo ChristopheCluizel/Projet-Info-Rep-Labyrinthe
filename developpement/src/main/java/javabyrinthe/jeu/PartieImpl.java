@@ -87,4 +87,8 @@ public class PartieImpl implements Partie, Remote {
 	public int getnbTour() {
 		return this.nbTour;
 	}
+
+	public ArrayList<JoueurInterface> getJoueurs(){
+		return this.joueurList;
+	}
 }
