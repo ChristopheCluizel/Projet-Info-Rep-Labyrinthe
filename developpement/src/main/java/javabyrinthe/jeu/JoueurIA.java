@@ -47,7 +47,6 @@ public class JoueurIA extends Joueur {
 		} catch (CompilationFailedException e) {
 			throw e;
 		} catch (Exception e) {
-			System.out.println("pouet#chrichri");
 			e.printStackTrace();
 		}
 

@@ -37,6 +37,7 @@ public class GameWindow extends BasicGameState{
 	private int tailleCase, tailleMur, offset;
 	private Labyrinth l;
 	private JoueurInterface stub;
+	private String selection;
 
  	@Override
  	public int getID() {
@@ -48,6 +49,18 @@ public class GameWindow extends BasicGameState{
  			case (Input.KEY_ESCAPE):
  				container.exit();
  				break;
+ 			case (Input.KEY_UP):
+ 				selection = "HAUT";
+ 			break;
+ 			case (Input.KEY_DOWN):
+ 				selection = "BAS";
+ 			break;
+ 			case (Input.KEY_RIGHT):
+ 				selection = "DROITE";
+ 			break;
+ 			case (Input.KEY_LEFT):
+ 				selection = "GAUCHE";
+ 			break;
  			default:
  				break;
  		}
@@ -65,6 +78,7 @@ public class GameWindow extends BasicGameState{
  	public void init(GameContainer container, StateBasedGame game) throws SlickException{
  		this.container = container;
  		this.game=(IHM)game;
+ 		this.selection = "";
  		tailleCase=50;
  		tailleMur=5;
  		offset=50;
@@ -78,6 +92,7 @@ public class GameWindow extends BasicGameState{
 
  	@Override
  	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+ 		//affichage du labyrinthe
  		int nbCases = l.getSize()*l.getSize();
  		LabyrinthGenerator lg = new LabyrinthGenerator();
  		g.setColor(Color.white);
@@ -102,12 +117,22 @@ public class GameWindow extends BasicGameState{
  		g.fillRect(offset + depart.getX()*tailleCase + tailleMur, offset + depart.getY()*tailleCase +tailleMur,tailleCase-tailleMur,tailleCase-tailleMur);
  		g.setColor(Color.red);
  		g.fillRect(offset + arrive.getX()*tailleCase + tailleMur, offset + arrive.getY()*tailleCase +tailleMur,tailleCase-tailleMur,tailleCase-tailleMur);
+ 		
+ 		//selection
  		try{
+ 			g.setColor(Color.white);
+ 			if(stub.getTour()){
+  				g.drawString("C'est à votre tour !",300,420);
+ 				g.drawString("Deplacement : "+selection,300,450);
+ 			}else{
+ 				g.drawString("Patientez...",300,420);
+ 			}
+
+ 			//affichage des joueurs
  			ArrayList<JoueurInterface> joueurs = stub.getPartie().getJoueurs();
  			g.setColor(Color.white);
- 			//g.drawString("nbjoueurs : "+joueurs.size(),100,450);
  			for(int i=0 ; i<joueurs.size() ; i++){
- 				g.drawString(joueurs.get(i).getActualPosition().toString(),100,450+i*50);
+ 				g.drawString(joueurs.get(i).getActualPosition().toString(),100,450+i*20);
  			}
  		} catch (Exception e) {
  			e.printStackTrace();
@@ -117,6 +142,14 @@ public class GameWindow extends BasicGameState{
  	@Override
  	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {} 
 
+ 	public void setSelection(String str){
+ 		this.selection = str;
+ 	}
+
+ 	public String getSelection(){
+ 		return this.selection;
+ 	}
+
  	private void creerPartie(){
  		String machine = "localhost";
 		int port = 1099;
@@ -125,7 +158,7 @@ public class GameWindow extends BasicGameState{
 		try {
 			// création du joueur
 			if (game.getMode().equals("humain")) {
-				stub = (JoueurInterface) UnicastRemoteObject.exportObject(new JoueurHumain(game.getPseudo()), 0);
+				stub = (JoueurInterface)UnicastRemoteObject.exportObject(new JoueurHumain(game.getPseudo()), 0);
 			} else {
 				stub = (JoueurInterface) UnicastRemoteObject.exportObject(new JoueurIA(game.getPseudo()), 0);
 			}
@@ -162,7 +195,7 @@ public class GameWindow extends BasicGameState{
 		try {
 			// création du joueur
 			if (game.getMode().equals("humain")) {
-				stub = (JoueurInterface) UnicastRemoteObject.exportObject(new JoueurHumain(game.getPseudo()), 0);
+				stub = (JoueurInterface)UnicastRemoteObject.exportObject(new JoueurHumain(game.getPseudo()), 0);
 			} else {
 				stub = (JoueurInterface) UnicastRemoteObject.exportObject(new JoueurIA(game.getPseudo()), 0);
 			}

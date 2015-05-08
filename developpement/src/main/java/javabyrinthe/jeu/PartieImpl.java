@@ -69,7 +69,8 @@ public class PartieImpl implements Partie, Remote {
 		joueur.setActualPosition(this.labyrinth.getDeparture());
 		this.joueurList.add(joueur);
 		this.nbJoueur++;
-		joueur.setPartie(this);
+		for(JoueurInterface j : joueurList)
+			j.setPartie(this);
 	}
 
 	public int getnbJoueurMax() {

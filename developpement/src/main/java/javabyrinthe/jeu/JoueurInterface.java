@@ -4,6 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.io.Serializable;
 
+import javabyrinthe.ihm.GameWindow;
 import javabyrinthe.tools.Coordinate;
 
 public interface JoueurInterface extends Remote, Serializable {
@@ -14,4 +15,6 @@ public interface JoueurInterface extends Remote, Serializable {
   public void setActualPosition(Coordinate actualPosition) throws RemoteException;
   public void setPartie(Partie partie) throws RemoteException;
   public Partie getPartie() throws RemoteException;
+  public void setTour(boolean b) throws RemoteException;
+  public boolean getTour() throws RemoteException;
 }
