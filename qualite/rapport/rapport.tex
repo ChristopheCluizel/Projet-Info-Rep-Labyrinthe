@@ -84,22 +84,32 @@ citecolor=black,  %couleur des références
 
 \tableofcontents
 
-\chapter*{Introduction}
+\chapter{Introduction}
 	\input{1.Introduction.tex}
-	
+
 \chapter{Document de spécifications mis à jour}
+  Le document suivant reprend nos spécifications mises à jour suite à l'avancement du projet. Les modifications apportées seront signalées en vert.
 	\includepdf[pages=-]{specifications.pdf}
-	
+  \emph{Fin du document de spécifications.}
+
 \chapter{Document de conception mis à jour}
+  Le document suivant reprend notre conception mise à jour suite à l'avancement du projet. Les modifications apportées seront signalées en vert.
 	\includepdf[pages=-]{conception.pdf}
+  \emph{Fin du document de conception.}
 
 \chapter{Choix techniques}
 	\input{2.ChoixTechniques.tex}
 
-\chapter{Améliorations possibles}
-	\input{3.Ameliorations.tex}
+\chapter{Problèmes rencontrés \& solutions apportées}
+  \input{3.Problemes_solutions.tex}
 
-\chapter{Répartition des tâches}
-	\input{4.Repartition.tex}
+\chapter{Améliorations possibles}
+	\input{4.Ameliorations.tex}
+
+\chapter{Gestion de projet}
+	\input{5.Gestion_de_projet.tex}
+
+\chapter{Conclusion}
+\input{6.Conclusion.tex}
 
 \end{document}

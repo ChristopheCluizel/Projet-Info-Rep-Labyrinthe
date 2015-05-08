@@ -13,21 +13,36 @@ import java.util.Iterator;
  */
 public class Graph implements Serializable {
 
+	/**
+	 * The name of the graph
+	 */
 	String name;
+	
+	/**
+	 * The number of edges of the graph
+	 */
 	Integer nbEdge;
-	HashMap<Integer, ArrayList<Integer>> adjacence;
+	
+	/**
+	 * A map with the nodes of the graph as keys and as values, for each node its adjacency nodes 
+	 */
+	HashMap<Integer, ArrayList<Integer>> adjacency;
+	
+	
+	/**
+	 * A map of all the node of the graph. Here the key equals the value.
+	 */
 	HashMap<Integer, Integer> nodes;
 
 	/**
 	 * Construct an empty Graph
 	 * 
 	 * @param name The name of the graph
-	 * @param nbEdge The number of edges of the graph
 	 */
 	public Graph(String name) {
 		this.name = name;
 		this.nbEdge = 0;
-		this.adjacence = new HashMap<Integer, ArrayList<Integer>>();
+		this.adjacency = new HashMap<Integer, ArrayList<Integer>>();
 		this.nodes = new HashMap<Integer, Integer>();
 	}
 
@@ -65,7 +80,7 @@ public class Graph implements Serializable {
 	 */
 	public void addNode(Integer key) {
 		this.nodes.put(key, key);
-		this.adjacence.put(key, new ArrayList<Integer>());
+		this.adjacency.put(key, new ArrayList<Integer>());
 	}
 
 	/**
@@ -76,18 +91,18 @@ public class Graph implements Serializable {
 	 * @param value the value of the edge
 	 */
 	public void addEdge(Integer key1, Integer key2, Integer value) {
-		this.adjacence.get(key1).add(key2);
+		this.adjacency.get(key1).add(key2);
 		this.nbEdge += 1;
 	}
 
 	/**
 	 * Get the successors of a node
 	 * 
-	 * @param key the key of the node that we want the predecessors
+	 * @param key the key of the node that we want the successors
 	 * @return a list of keys of nodes
 	 */
 	public ArrayList<Integer> getSuccessors(Integer key) {
-		return this.adjacence.get(key);
+		return this.adjacency.get(key);
 	}
 
 	/**
@@ -97,14 +112,14 @@ public class Graph implements Serializable {
 	 * @return if the node is present or not
 	 */
 	public Boolean nodePresent(Integer key) {
-		return adjacence.containsKey(key);
+		return adjacency.containsKey(key);
 	}
 
 	/**
 	 * Display all the nodes of the graph with its successors
 	 */
 	public void display() {
-		Iterator<Integer> i = this.adjacence.keySet().iterator();
+		Iterator<Integer> i = this.adjacency.keySet().iterator();
 		Integer key = null;
 		while (i.hasNext()) {
 			key = (Integer) i.next();
@@ -112,30 +127,32 @@ public class Graph implements Serializable {
 		}
 	}
 
-	/**
-	 * Redefine the toString method to describe a graph.
-	 */
 	@Override
 	public String toString() {
 		String string = getNumberOfEdges().toString() + "\n" + "graph " + name + " {\n";
-		Iterator<Integer> i = this.adjacence.keySet().iterator();
+		Iterator<Integer> i = this.adjacency.keySet().iterator();
 		while (i.hasNext()) {
 			Integer key = (Integer) i.next();
-			for (int j = 0; j < this.adjacence.get(key).size(); j++) {
-				string += key.toString() + " -> " + this.adjacence.get(key).get(j).toString() + "\n";
+			for (int j = 0; j < this.adjacency.get(key).size(); j++) {
+				string += key.toString() + " -> " + this.adjacency.get(key).get(j).toString() + "\n";
 			}
 		}
 		string += "}";
 		return string;
 	}
 
+	/**
+	 * Serialize the graph for the inputs of the AI of a player
+	 * 
+	 * @return a serialization for the AI of the player
+	 */
 	public String toStringForUser() {
 		String string = getNumberOfEdges().toString() + "\n";
-		Iterator<Integer> i = this.adjacence.keySet().iterator();
+		Iterator<Integer> i = this.adjacency.keySet().iterator();
 		while (i.hasNext()) {
 			Integer key = (Integer) i.next();
-			for (int j = 0; j < this.adjacence.get(key).size(); j++) {
-				string += key.toString() + " " + this.adjacence.get(key).get(j).toString() + "\n";
+			for (int j = 0; j < this.adjacency.get(key).size(); j++) {
+				string += key.toString() + " " + this.adjacency.get(key).get(j).toString() + "\n";
 			}
 		}
 		return string.substring(0, string.length() - 1);

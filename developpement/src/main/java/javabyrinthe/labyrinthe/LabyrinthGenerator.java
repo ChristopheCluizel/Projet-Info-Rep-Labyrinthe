@@ -25,6 +25,7 @@ public class LabyrinthGenerator implements Serializable {
 	 * @return the labyrinth loaded
 	 * @throws FileNotFoundException
 	 * @see Graph
+	 * @see Labyrinth
 	 */
 	public Labyrinth loadLabyrinth(String filePath) throws FileNotFoundException {
 		try {
@@ -53,7 +54,6 @@ public class LabyrinthGenerator implements Serializable {
 				graph.addEdge(key1, key2, 1);
 			}
 			reader.close();
-			// System.out.println("size laby: " + graph.getSize());
 			return new Labyrinth(graph, departure, arrival, width, height, name);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -65,7 +65,7 @@ public class LabyrinthGenerator implements Serializable {
 	 * Turn a key node of the graph into a coordinate of a square of the labyrinth
 	 * 
 	 * @param key the key of a node of the graph to convert in coordinates
-	 * @param graphWidth the size of the graph (height and width are equal)
+	 * @param graphWidth the width of the graph
 	 * @return a couple (x,y) which are the coordinates of a square of the
 	 *         labyrinth
 	 * @see Coordinate
@@ -78,7 +78,7 @@ public class LabyrinthGenerator implements Serializable {
 	 * Turn a coordinate of a squate of the labyrinth into a key node of the graph
 	 * 
 	 * @param coordinate the coordinate of a square of the labyrinth
-	 * @param graphWidth the size of the graph (height and width are equal)
+	 * @param graphWidth the width of the graph
 	 * @return the key of a node of the graph
 	 * @see Coordinate
 	 */

@@ -12,11 +12,34 @@ import graph.Graph;
  * @author christophe
  */
 public class Labyrinth implements Serializable {
+	/**
+	 * The graph which represents the labyrinth
+	 */
 	Graph graph;
+
+	/**
+	 * The name of the labyrinth
+	 */
 	String name;
+
+	/**
+	 * The width of the labyrinth
+	 */
 	int width;
+
+	/**
+	 * The height of the labyrinth
+	 */
 	int height;
+
+	/**
+	 * The departure square of the labyrinth
+	 */
 	Coordinate departure;
+
+	/**
+	 * The arrival square of the labyrinth
+	 */
 	Coordinate arrival;
 
 	/**
@@ -26,6 +49,9 @@ public class Labyrinth implements Serializable {
 	 * @param graph the graph of the labyrinth
 	 * @param departure the coordinate of the departure square
 	 * @param arrival the coordinate of the arrival square
+	 * @param width the width of the labyrinth
+	 * @param height the height of the labyrinth
+	 * @param name the name of the labyrinth
 	 * @see Graph
 	 * @see Coordinate
 	 */
@@ -41,32 +67,42 @@ public class Labyrinth implements Serializable {
 	@Override
 	public String toString() {
 		return this.name + " " + this.width + " " + this.height + "\n" + this.departure.getX() + " "
-				+ this.departure.getY() + "\n" + this.arrival.getX() + " " + this.arrival.getY() + "\n"
-				+ graph.toString();
-	}
-	
-	public String toStringForUser() {
-		return this.width + " " + this.height + "\n" + this.departure.getX() + " "
-				+ this.departure.getY() + "\n" + this.arrival.getX() + " " + this.arrival.getY() + "\n"
-				+ graph.toStringForUser();
+				+ this.departure.getY() + "\n" + this.arrival.getX() + " " + this.arrival.getY() + "\n" + graph.toString();
 	}
 
+	/**
+	 * Serialize the graph for the inputs of the AI of a player
+	 * 
+	 * @return a serialization for the AI of the player
+	 */
+	public String toStringForUser() {
+		return this.width + " " + this.height + "\n" + this.departure.getX() + " " + this.departure.getY() + "\n"
+				+ this.arrival.getX() + " " + this.arrival.getY() + "\n" + graph.toStringForUser();
+	}
+
+	/**
+	 * Return the width of the labyrinth
+	 * 
+	 * @return the width of the labyrinth
+	 */
 	public int getWidth() {
 		return width;
 	}
 
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
+	/**
+	 * Return the height of the labyrinth
+	 * 
+	 * @return the height of the labyrinth
+	 */
 	public int getHeight() {
 		return height;
 	}
 
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
+	/**
+	 * Return the name of the labyrinth
+	 * 
+	 * @return the name of the labyrinth
+	 */
 	public String getName() {
 		return name;
 	}
