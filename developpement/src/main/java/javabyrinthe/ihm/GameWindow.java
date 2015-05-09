@@ -1,5 +1,6 @@
 package javabyrinthe.ihm;
 
+import java.lang.Thread;
 import java.io.FileNotFoundException;
 
 import java.rmi.registry.LocateRegistry;
@@ -37,12 +38,25 @@ public class GameWindow extends BasicGameState{
 	private int tailleCase, tailleMur, offset;
 	private Labyrinth l;
 	private JoueurInterface stub;
-	private String selection;
+	private static String selection = "";
+	private ArrayList<Color> couleurs;
 
  	@Override
  	public int getID() {
  		return ID;
- 	} 
+ 	}
+
+ 	public static String recupererSelection(){
+ 		try{
+ 			selection = "";
+ 			while(selection.equals("")){
+ 				Thread.sleep(100); 	
+ 			}
+ 		}catch(Exception e){
+ 			e.printStackTrace();
+ 		}
+ 		return selection;
+ 	}
 
  	public void keyReleased(int k,char c){
  		switch(k){
@@ -82,6 +96,11 @@ public class GameWindow extends BasicGameState{
  		tailleCase=50;
  		tailleMur=5;
  		offset=50;
+ 		couleurs = new ArrayList<Color>();
+ 		couleurs.add(Color.cyan);
+ 		couleurs.add(Color.magenta);
+ 		couleurs.add(Color.yellow);
+ 		couleurs.add(Color.blue);;
  		LabyrinthGenerator lg = new LabyrinthGenerator();
  		try{
  			l = lg.loadLabyrinth("src/main/resources/maze1.dot");
@@ -130,9 +149,14 @@ public class GameWindow extends BasicGameState{
 
  			//affichage des joueurs
  			ArrayList<JoueurInterface> joueurs = stub.getPartie().getJoueurs();
- 			g.setColor(Color.white);
  			for(int i=0 ; i<joueurs.size() ; i++){
- 				g.drawString(joueurs.get(i).getActualPosition().toString(),100,450+i*20);
+ 				g.setColor(this.couleurs.get(i));
+ 				g.drawString(joueurs.get(i).getPseudo(),100,450+i*20);
+ 				//affichage du pion
+ 				Coordinate tmp = joueurs.get(i).getActualPosition();
+ 				int x = (i<2) ? 0 : 1;
+ 				int y = (i%2==0) ? 0 : 1;
+ 				g.fillOval(offset+tmp.getX()*tailleCase+tailleMur +x*(tailleCase-tailleMur)/2,offset+tmp.getY()*tailleCase+tailleMur +y*(tailleCase-tailleMur)/2, (tailleCase-tailleMur)/2 , (tailleCase-tailleMur)/2);
  			}
  		} catch (Exception e) {
  			e.printStackTrace();
