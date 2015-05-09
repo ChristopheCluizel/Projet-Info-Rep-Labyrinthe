@@ -7,7 +7,11 @@
 
     % -------- Compilation et exécution depuis le code source -------
     \subsection{Compilation et exécution depuis le code source}
-        Si un joueur décide d'implémenter une IA pour jouer au jeu Javabyrinthe, il faut que celle-ci soit compilée et exécutée à partir de notre code java. Nous voulions initialement compiler et exécuter le code de l'IA sur le serveur. Cependant, étant donné la complexité et l'éloignement du problème par rapport à la thématique de l'informatique répartie, nous avons décidé de compiler et d'exécuter ce code sur la machine cliente.
+        Si un joueur décide d'implémenter une IA pour jouer au jeu Javabyrinthe, il faut que celle-ci soit compilée et exécutée à partir de notre code java. Nous voulions initialement compiler et exécuter le code de l'IA sur le serveur afin d'autoriser au joueur plus de liberté. En effet, le joueur pourrait ainsi choisir son langage de programmation, sans nécessairement posséder les outils de compilation et d'exécution associés.\\
+		
+		Un tel fonctionnement nécessite le lancement d'un processus (contenant en l'occurrence la commande \texttt{javac} et l'exécution de l'intelligence artificielle) depuis notre code principal java du serveur ainsi qu'un dialogue entre ces deux éléments. Au vu de la complexité et l'éloignement du problème par rapport à la thématique de l'informatique répartie, nous avons décidé de compiler et d'exécuter ce code sur la machine cliente.\\
+		
+		Le plus simple aurait été de demander à l'utilisateur du programme de coder entièrement un fichier JoueurIA.java contenant les méthodes adéquates et de le compiler à la main. Notre programme n'aurait plus qu'à instancier cet objet. Afin de ne pas perdre le travail déjà effectué précédemment sur les processus, nous sommes parvenus à un état intermédiaire où notre programme compile et exécute automatiquement sur le serveur le code de l'IA récupéré grâce à l'interface graphique.
 
 \TODO{Christophe, Alexandre, Charlotte/Céline}
 
