@@ -59,6 +59,7 @@ public class Menu extends BasicGameState{
  				game.setNbJoueurMax(Integer.parseInt(nbJoueur.getText()));
  				game.setAction("creer");
  				game.enterState(2);
+ 				System.out.println("State 2 entered");
  			}
  		}
  	}
@@ -72,6 +73,12 @@ public class Menu extends BasicGameState{
  			default:
  				break;
  		}
+ 	}
+
+ 	@Override
+ 	public void enter(GameContainer container, StateBasedGame game){
+		go1.setSelected(false);
+		go2.setSelected(false);
  	}
  
  	@Override

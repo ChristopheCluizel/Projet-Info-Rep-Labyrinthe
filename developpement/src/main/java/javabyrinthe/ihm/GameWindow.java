@@ -36,11 +36,13 @@ public class GameWindow extends BasicGameState{
 	private static final int ID = 2; 
 	private GameContainer container;
 	private IHM game;
-	private int tailleCase, tailleMur, offset;
+	private int tailleCaseInit, tailleMurInit, offsetInit;
 	private Labyrinth l;
 	private JoueurInterface stub;
 	private static String selection = "";
+	private static String etat = "enCours";
 	private ArrayList<Color> couleurs;
+	private Button menu;
 
  	@Override
  	public int getID() {
@@ -58,6 +60,15 @@ public class GameWindow extends BasicGameState{
  		}
  		return selection;
  	}
+
+ 	public static void victoire(){
+ 		etat = "victoire";
+ 	}
+
+ 	public static void defaite(){
+ 		etat = "defaite";
+ 	}
+
 
  	public void keyReleased(int k,char c){
  		switch(k){
@@ -80,34 +91,48 @@ public class GameWindow extends BasicGameState{
  				break;
  		}
  	}
+
+ 	@Override
+ 	public void mousePressed(int button, int x, int y){
+ 		//System.out.println("("+x+","+y+")");
+ 		
+ 		if(menu.isClicked(x,y)){
+ 			game.enterState(1);
+ 			System.out.println("Retour au menu");
+ 			}
+ 		
+ 	}
  
  	@Override
  	public void enter(GameContainer container, StateBasedGame game){
+ 		etat = "enCours";
+ 		menu.setSelected(false);
  		if(this.game.getAction().equals("joindre"))
  			rejoindrePartie();
  		else if(this.game.getAction().equals("creer"))
  			creerPartie();
+ 		try{
+ 			l = stub.getPartie().getLabyrinthe();
+ 		}catch(Exception e){
+ 			e.printStackTrace();
+ 		}
  	}
 
  	@Override
  	public void init(GameContainer container, StateBasedGame game) throws SlickException{
+ 		System.out.println("Initialisation du jeu ...");
  		this.container = container;
  		this.game=(IHM)game;
+ 		menu = new Button(new Coordinate(350,450),160,20,"Retour au Menu",false);
  		this.selection = "";
- 		tailleCase=50;
- 		tailleMur=5;
- 		offset=50;
+ 		tailleCaseInit=50;
+ 		tailleMurInit=5;
+ 		offsetInit=50;
  		couleurs = new ArrayList<Color>();
  		couleurs.add(Color.cyan);
  		couleurs.add(Color.magenta);
  		couleurs.add(Color.yellow);
  		couleurs.add(Color.blue);;
- 		LabyrinthGenerator lg = new LabyrinthGenerator();
- 		try{
- 			l = lg.loadLabyrinth("src/main/resources/maze1.dot");
- 		}catch(FileNotFoundException e){
- 			e.printStackTrace();
- 		}
  	}
 
  	@Override
@@ -115,6 +140,9 @@ public class GameWindow extends BasicGameState{
  		g.drawImage(new Image("src/main/resources/backgroundJeux.png"),0,0);
  		//affichage du labyrinthe
  		int nbCases = l.getSize()*l.getSize();
+ 		int tailleCase = tailleCaseInit*5/((int)(Math.sqrt(l.getSize())));
+ 		int tailleMur = tailleMurInit*5/((int)(Math.sqrt(l.getSize())));
+ 		int offset = offsetInit;
  		LabyrinthGenerator lg = new LabyrinthGenerator();
  		g.setColor(Color.white);
  		for(int i=0 ; i<l.getSize() ; i++){
@@ -145,8 +173,18 @@ public class GameWindow extends BasicGameState{
  			if(stub.getTour()){
   				g.drawString("C'est à votre tour !",300,420);
  				g.drawString("Deplacement : "+selection,300,450);
- 			}else{
- 				g.drawString("Patientez...",300,420);
+ 			}else if (etat=="enCours"){
+ 				g.drawString("Patientez...",200,420);
+ 			}
+ 			if(etat=="victoire")
+ 			{
+ 				g.drawString("Vous avez gagné!",250,420);
+ 				menu.afficher(g);
+ 			}
+ 			else if(etat=="defaite")
+ 			{
+ 				g.drawString("Vous avez perdu...",250,420);
+ 				menu.afficher(g);
  			}
 
  			//affichage des joueurs

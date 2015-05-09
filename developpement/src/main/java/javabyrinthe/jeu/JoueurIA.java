@@ -62,8 +62,9 @@ public class JoueurIA extends Joueur {
 		System.out.println("A l'IA de jouer. Sa position actuelle : " + actualPosition.toString());
 		String reponse = "";
 		try {
+			Thread.sleep(100);
 			streamEnvoi.flush();
-			streamEnvoi.write("hello\r\n");// partieEnCours.getLabyrinthe().toString());
+			streamEnvoi.write(partieEnCours.getLabyrinthe().toString());
 			// // on envoie les paramètres
 			// nécessaires pour exécuter la
 			// méthode choisirDirection écrite

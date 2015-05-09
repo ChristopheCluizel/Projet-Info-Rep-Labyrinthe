@@ -15,6 +15,22 @@ public class MainJoueur {
 	}
 
 	public static String choisirDirection() {
+		int max = 4;
+		int min = 1;
+		Random rand = new Random();
+		int nombreAleatoire = rand.nextInt(max - min + 1) + min;
+		switch(nombreAleatoire)
+		{
+			case 1:
+				return "HAUT";
+			case 2:
+				return "BAS";
+			case 3:
+				return "GAUCHE";
+			case 4:
+				return "DROITE";
+
+		}
 		return "HAUT"; // ou "BAS", "DROITE", "GAUCHE"
 	}
 }

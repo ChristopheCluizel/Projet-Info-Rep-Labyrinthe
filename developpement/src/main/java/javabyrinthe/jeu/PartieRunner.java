@@ -13,7 +13,24 @@ public class PartieRunner implements  Runnable {
 	 * @param gagnant the name of the winner player
 	 */
 	public void lancerFinDePartie(String gagnant) {
+
 		System.out.println(gagnant + " a GAGNE !!!");
+		for (JoueurInterface joueur : partie.getJoueurs())
+		{
+			try{
+				System.out.println(joueur.getPseudo());
+				if(joueur.getPseudo().equals(gagnant))
+				{
+					joueur.victoire();
+					System.out.println(gagnant + " a vraiment GAGNE !!!");
+				}
+				else
+					joueur.defaite();
+			}catch(Exception e)
+			{
+				System.out.println("/!\\Fin de Partie, exception: " + e);
+			}
+		}
 	}
 
 	/**

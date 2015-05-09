@@ -41,6 +41,12 @@ public class PartieManagerImpl implements PartieManager, Remote {
 			joueur.setPseudo(pseudo);
 			nouvellePartie.addJoueur(joueur);
 		   	System.out.println("Ajout d'un joueur dans la partie "+ nouvellePartie + ". Etat nombre joueurs: "+ nouvellePartie.getnbJoueur()  + "/" + nouvellePartie.getnbJoueurMax());
+			if(nouvellePartie.getnbJoueur() == nouvellePartie.getnbJoueurMax()){
+    			System.out.println();
+				System.out.println("########### Partie lancée ############");
+    			PartieRunner partieRunner = new PartieRunner(nouvellePartie);
+    			partieRunner.run();
+    		}
 			return nouvellePartie;
 		} catch (Exception e) {
       		System.out.println("Erreur dans création de partie " + e);

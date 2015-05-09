@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.util.Scanner;
 
 import javabyrinthe.ihm.GameWindow;
+import org.newdawn.slick.state.BasicGameState; 
 import javabyrinthe.labyrinthe.LabyrinthGenerator;
 import javabyrinthe.tools.Coordinate;
 
@@ -29,6 +30,20 @@ public abstract class Joueur implements JoueurInterface, Remote {
 	 * @return the answer entered by the player
 	 */
 	public abstract String jouer() throws RemoteException;
+
+	/**
+	 * Tell the player that he won
+	 */
+	public void victoire() throws RemoteException {
+		GameWindow.victoire();
+	}
+
+	/**
+	 * Tell the player that he didn't won
+	 */
+	public void defaite() throws RemoteException {
+		GameWindow.defaite();
+	}
 
 	/**
 	 * Get the actual position of the player in the labyrinth

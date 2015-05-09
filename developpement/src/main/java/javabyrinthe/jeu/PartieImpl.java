@@ -22,10 +22,8 @@ public class PartieImpl implements Partie, Remote {
 		this.nbJoueurMax = nbJoueurMax;
 		this.joueurList = new ArrayList<JoueurInterface>();
 		try {
-			this.labyrinth = new LabyrinthGenerator().loadLabyrinth("src/main/resources/maze1.dot");
-			this.labyrinth.setArrival(new Coordinate(2, 3)); // for debug only (to
-																												// shorten the path to
-																												// arrival) !!!!!
+			this.labyrinth = new LabyrinthGenerator().loadLabyrinth("src/main/resources/maze2.dot");
+	
 			System.out.println("######### Labyrinthe chargé ##########");
 			System.out.println("Key departure: "
 					+ new LabyrinthGenerator().coordinatesToKey(this.labyrinth.getDeparture(), this.labyrinth.getWidth()) + " -> "

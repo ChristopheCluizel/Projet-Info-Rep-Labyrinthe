@@ -11,7 +11,7 @@ import javabyrinthe.jeu.PartieManagerImpl;
 public class Serveur {
   public static void main(String args[]) {
     int port  = 1099;
-//     System.setProperty("sun.rmi.transport.tcp.responseTimeout","5000");//timeout pour appeler une méthode du client
+    System.setProperty("sun.rmi.transport.tcp.responseTimeout","5000");//timeout pour appeler une méthode du client
     try {
         PartieManager stub = (PartieManager)UnicastRemoteObject.exportObject(new PartieManagerImpl(), 0);
         Registry registry = LocateRegistry.getRegistry(port);
