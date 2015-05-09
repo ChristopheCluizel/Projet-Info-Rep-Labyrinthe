@@ -31,11 +31,11 @@ public class Button{
 
 	public void afficher(Graphics g){
 		if(selected)
-			g.setColor(Color.red);
+			g.setColor(new Color(46, 204, 113));
 		else
-			g.setColor(Color.white);
+			g.setColor(new Color(236, 240, 241));
 		g.fillRect(this.getX(),this.getY(),this.getHeight(),this.getWidth());
-		g.setColor(Color.black);
+		g.setColor(new Color(44, 62, 80));
 		g.drawString(text,this.getX(),this.getY());
 	}
 

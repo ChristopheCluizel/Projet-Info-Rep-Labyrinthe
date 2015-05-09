@@ -17,6 +17,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState; 
 import org.newdawn.slick.state.StateBasedGame; 
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Image;
 
 import javabyrinthe.labyrinthe.Labyrinth;
 import javabyrinthe.labyrinthe.LabyrinthGenerator;
@@ -111,6 +112,7 @@ public class GameWindow extends BasicGameState{
 
  	@Override
  	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+ 		g.drawImage(new Image("src/main/resources/backgroundJeux.png"),0,0);
  		//affichage du labyrinthe
  		int nbCases = l.getSize()*l.getSize();
  		LabyrinthGenerator lg = new LabyrinthGenerator();

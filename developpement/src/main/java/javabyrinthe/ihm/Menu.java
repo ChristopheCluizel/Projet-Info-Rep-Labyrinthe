@@ -9,6 +9,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState; 
 import org.newdawn.slick.state.StateBasedGame; 
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.gui.TextField;
 
 import javabyrinthe.tools.Coordinate;
@@ -88,6 +89,7 @@ public class Menu extends BasicGameState{
 
  	@Override
  	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+ 		g.drawImage(new Image("src/main/resources/backgournd.png"),0,0);
  		g.setColor(Color.white);
  		g.drawString("Accueil",252,10);
  		g.drawString("Javabyrinthe",365,65);
