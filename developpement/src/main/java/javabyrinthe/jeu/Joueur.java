@@ -4,6 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Scanner;
 
+import javabyrinthe.ihm.GameWindow;
 import javabyrinthe.labyrinthe.LabyrinthGenerator;
 import javabyrinthe.tools.Coordinate;
 
@@ -12,12 +13,14 @@ public abstract class Joueur implements JoueurInterface, Remote {
 	String pseudo = "";
 	Coordinate actualPosition;
 	Partie partieEnCours;
+	boolean aTonTour;
 	
 	
 	public Joueur(String pseudo) throws RemoteException {
 		this.setPseudo(pseudo);
 		this.actualPosition = null;
 		this.partieEnCours = null;
+		this.aTonTour = false;
 	}
 	
 	/** 
@@ -69,5 +72,13 @@ public abstract class Joueur implements JoueurInterface, Remote {
 	
 	public Partie getPartie() throws RemoteException {
 		return this.partieEnCours;
+	}
+
+	public void setTour(boolean b) throws RemoteException{
+		this.aTonTour = b;
+	}
+
+	public boolean getTour()throws RemoteException{
+		return this.aTonTour;
 	}
 }

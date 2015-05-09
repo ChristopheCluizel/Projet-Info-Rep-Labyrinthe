@@ -1,5 +1,7 @@
 package javabyrinthe.jeu;
 
+import java.util.ArrayList;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.io.Serializable;
@@ -14,4 +16,5 @@ public interface Partie extends Remote, Serializable {
   public int getnbTourMax();
   public int getnbTour();
   public Labyrinth getLabyrinthe();
+  public ArrayList<JoueurInterface> getJoueurs();
 }
