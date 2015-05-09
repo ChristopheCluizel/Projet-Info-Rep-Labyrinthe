@@ -23,7 +23,7 @@ public class PartieImpl implements Partie, Remote {
 		this.joueurList = new ArrayList<JoueurInterface>();
 		try {
 			this.labyrinth = new LabyrinthGenerator().loadLabyrinth("src/main/resources/maze1.dot");
-			this.labyrinth.setArrival(new Coordinate(2, 3)); // for debug only (to
+//			this.labyrinth.setArrival(new Coordinate(2, 3)); // for debug only (to
 																												// shorten the path to
 																												// arrival) !!!!!
 			System.out.println("######### Labyrinthe chargé ##########");
