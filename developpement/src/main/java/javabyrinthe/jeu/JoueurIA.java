@@ -12,7 +12,7 @@ public class JoueurIA extends Joueur {
 	Process processusAssocie;
 	BufferedWriter streamEnvoi;
 	BufferedReader streamReponse;
-	Boolean running;
+	Boolean running = false;
 
 	public JoueurIA(String pseudo) throws RemoteException, CompilationFailedException {
 		super(pseudo);
@@ -40,10 +40,11 @@ public class JoueurIA extends Joueur {
 			final ProcessBuilder pb2 = new ProcessBuilder("java", nomFichier);
 			pb2.directory(new File("src/main/resources/"));
 			processusAssocie = pb2.start();
-			running = true;
 			// Récupération des flux pour le dialogue
 			this.streamReponse = new BufferedReader(new InputStreamReader(processusAssocie.getInputStream()));
 			this.streamEnvoi = new BufferedWriter(new OutputStreamWriter(processusAssocie.getOutputStream()));
+			
+			
 		} catch (CompilationFailedException e) {
 			throw e;
 		} catch (Exception e) {
@@ -56,8 +57,17 @@ public class JoueurIA extends Joueur {
 		// help : http://ydisanto.developpez.com/tutoriels/java/runtime-exec/
 		// http://labs.excilys.com/2012./06/26/runtime-exec-pour-les-nuls-et-processbuilder/
 		if (!running) {
-			System.out.println("L'IA ne tourne pas.");
-			return "";
+			try{
+				//envoi du labyrinth
+				streamEnvoi.flush();
+				streamEnvoi.write(partieEnCours.getLabyrinthe().toString());
+				streamEnvoi.newLine();
+				streamEnvoi.flush();
+				running = true;
+				System.out.println("Labyrinth send.");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		try{
 			int exitValue = processusAssocie.exitValue();
@@ -72,15 +82,14 @@ public class JoueurIA extends Joueur {
 		try {
 			
 			streamEnvoi.flush();
-			streamEnvoi.write("hello\r\n");//partieEnCours.getLabyrinthe().toString());
-			// // on envoie les paramètres
+			streamEnvoi.write(actualPosition.toString());
+			// on envoie les paramètres
 			// nécessaires pour exécuter la
 			// méthode choisirDirection écrite
 			// par le joueur
 			streamEnvoi.newLine();
 			streamEnvoi.flush();
 			System.out.println("Attente de réponse...");
-			Thread.sleep(100);
 			reponse = streamReponse.readLine();
 			if (reponse == null)
 				reponse = "";
