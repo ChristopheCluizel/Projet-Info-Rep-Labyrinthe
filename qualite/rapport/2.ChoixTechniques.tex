@@ -1,29 +1,32 @@
 \section{Choix du langage de programmation}
-	Nous avons développé l'application Javabyrinthe en langage \textbf{Java}.
 
-	Depuis le début du projet, nous avions choisi ce langage car c'est celui que tous les membres de l'équipe du projet maîtrisent le mieux. Nous voulions éviter le plus possible les problèmes pouvant être générés par un trop faible connaissance du langage. Ainsi, la plupart des difficultés rencontrées ne sont donc pas dues au langage de programmation en lui-même, mais plutôt du domaine de l'informatique répartie. en effet, ce projet n'a pas pour but de nous entraîner à programmer mais plus de gérer les communications entre le serveur et ses clients.
+	Nous avons développé l'application Javabyrinthe en langage \textbf{Java}. Depuis le début du projet, nous avions choisi ce langage car c'est celui que tous les membres de l'équipe du projet maîtrisent le mieux. Nous voulions éviter le plus possible les problèmes pouvant être générés par un trop faible connaissance du langage. Ainsi, la plupart des difficultés rencontrées ne sont donc pas dues au langage de programmation en lui-même, mais plutôt du domaine de l'informatique répartie. en effet, ce projet n'a pas pour but de nous entraîner à programmer mais plus de gérer les communications entre le serveur et ses clients.
 
 	D'autre part, un langage orienté objet nous a paru adapté à notre projet. Nous avons pu utiliser différents objets, comme un objet Labyrinthe et un objet Joueur. Visualiser ces éléments en tant qu'objet est beaucoup plus simple pour comprendre le fonctionnement du projet et travailler en équipe.
-	
+
 	\paragraph*{}
-	Un générateur automatique de labyrinthe a aussi été implémenté. Ce dernier était optionnel, mais obtenir à chaque partie un labyrinthe différent est attractif. Ce générateur a été programmé en \textbf{Scala}. Ce langage a été utilisé car il permet de manipuler facilement des graphes, élément qui nous permet de représenter un labyrinthe.
+	Un générateur automatique de labyrinthe a aussi été implémenté. Ce dernier était optionnel, mais obtenir à chaque partie un labyrinthe différent est attractif. Ce générateur a été programmé en \textbf{Scala}. Ce langage a été utilisé car la personne qui a réalisé le générateur avait une préférence pour celui-ci.
+
 
 \section{Communication client-serveur}
+
 	Dans notre document de spécifications, nous avions décidé que l'échange d'information entre le serveur et les clients se ferait à l'aide de \textbf{sockets}.
 
 	Cependant, au fur et à mesure de l'avancement du projet, après la phase de conception, nous nous sommes rendus compte qu'utiliser \textbf{RMI} (Remote Method Invocation) serait probablement plus simple. Même si nous avions décidé de n'échanger que des chaînes de caractères, utiliser RMI permet aussi de distribuer un objet avec ses méthodes. Choisir d'utiliser RMI nous permettait donc de changer de stratégie et de travailler sur des objets distribués si nous n'arrivions pas à travailler en échangeant seulement des chaînes de caractères.
-	
-	L'autre raison qui nous a fait modifier ce point du document de conception est qu'à l'époque de sa rédaction, presque aucun membre de l'équipe ne connaissait RMI. Après l'avoir découvert en cours et expérimenté à l'aide de travaux pratiques, nous avons décidé d'opter pour l'utilisation de RMI plutôt que de sockets, car son utilisation nous a paru plus simple, de plus haut niveau.
-	
+
+	L'autre raison qui nous a fait modifier ce point du document de conception est qu'à l'époque de sa rédaction, presque aucun membre de l'équipe ne connaissait RMI\@. Après l'avoir découvert en cours et expérimenté à l'aide de travaux pratiques, nous avons décidé d'opter pour l'utilisation de RMI plutôt que de sockets, car son utilisation nous a paru plus simple, de plus haut niveau.
+
 	Utiliser RMI implique de programmer en Java, mais cela n'a pas été une contrainte pour l'équipe puisque nous avions décidé d'utiliser ce langage.
-	
+
 	Pour finir, RMI permet de gérer les exceptions de manière transparente, ce qui est un de ses avantages par rapport aux sockets. Gérer les exceptions levées par la compilation du programme IA codé par le joueur par exemple est donc simplifié.
 
+
 \section{Affichage}
-	Dès le début du projet, nous avions tous en tête la forme que prendrait notre jeu : le labyrinthe serait vu du dessus et prendrait la forme d'une grille avec des cases pleines représentant les murs. A partir de cette idée, nous avons chercher comment faire apparaître cette interface.
-	
+
+	Dès le début du projet, nous avions tous en tête la forme que prendrait notre jeu: le labyrinthe serait vu du dessus et prendrait la forme d'une grille avec des cases pleines représentant les murs. A partir de cette idée, nous avons chercher comment faire apparaître cette interface.
+
 	Il était bien entendu possible de dessiner le labyrinthe dans un terminal avec des pipes et des underscores mais nous souhaitons une interface utilisateur plus jolie et attrayante. Après quelques recherches et en visualisant des exemples d'utilisation de différentes bibliothèques, il s'est avéré que la bibliothèque Java \textbf{Slick2D} correspond le mieux à nos attentes.
 
-    En effet, cette bibliothèque permet bien de visualiser notre labyrinthe comme nous l'avions imaginé, à savoir sous la forme d'une grille ayant des cases vides là où le joueur peut se déplacer et des cases pleines qui représentent les murs.
+  En effet, cette bibliothèque permet bien de visualiser notre labyrinthe comme nous l'avions imaginé, à savoir sous la forme d'une grille ayant des cases vides là où le joueur peut se déplacer et des cases pleines qui représentent les murs.
 
-    De plus, la documentation très complète de cette bibliothèque ainsi que sa communauté assez active nous a permis d'utiliser rapidement cette bibliothèque afin de faire apparaître tous les éléments graphiques que nous souhaitions.
+  De plus, la documentation très complète de cette bibliothèque ainsi que sa communauté assez active nous a permis d'utiliser rapidement cette bibliothèque afin de faire apparaître tous les éléments graphiques que nous souhaitions.

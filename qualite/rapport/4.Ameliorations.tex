@@ -1,13 +1,14 @@
 % =========== Logique métier ===========
 \section{Logique métier}
-	
-	Comme décrit précédemment, dans la partie \ref{problemes_IA}, la compilation et l'exécution de l'intelligence artificielle fournie par le joueur est située dans un état intermédiaire. Une amélioration évidente consisterait à délocaliser l'ensemble des opérations concernant l'IA sur le serveur. Ceci impliquerait de transmettre le code sous la forme d'une chaîne de caractères. Le serveur serait ensuite en charge de créer un fichier JoueurIA.java contenant ce code et le compiler grâce à un processBuilder. L'instanciation de l'objet devra alors être opérée sur le serveur et l'objet ne serait plus réparti. \\
-	
+
+	Comme décrit précédemment, dans la partie~\ref{problemes_IA}, la compilation et l'exécution de l'intelligence artificielle fournie par le joueur est située dans un état intermédiaire. Une amélioration évidente consisterait à délocaliser l'ensemble des opérations concernant l'IA sur le serveur. Ceci impliquerait de transmettre le code sous la forme d'une chaîne de caractères. Le serveur serait ensuite en charge de créer un fichier JoueurIA.java contenant ce code et le compiler grâce à un processBuilder. L'instanciation de l'objet devra alors être opérée sur le serveur et l'objet ne serait plus réparti. \\
+
 	Comme mentionné précédemment, notre application pourrait être étendue à différents langages de programmation puisque l'IA s'exécute dans un processus à part dialoguant avec le programme principal. Dans l'hypothèse ou cette exécution (et la compilation associée) s'effectue sur le serveur, l'utilisateur n'aurait même pas besoin de posséder les outils de compilation et d'exécution du langage qu'il aura choisi. Par extension, des IA codées dans différents langages pourraient alors s'affronter dans les labyrinthes.
+
 
 % =========== Interface graphique ===========
 \section{Interface graphique}
 
-Dans notre idée de départ, afin de ressembler à codinGame, nous voulions que l'utilisateur soit en mesure de taper le code de son IA directement dans l'interface graphique. L'ajout d'une telle fonctionnalité dans Slick2d ne s'avère pas approprié. En effet, ceci complexifie le développement de l'interface et la gestion d'événements et ne permet pas de conserver la coloration syntaxique propre au langage utilisé. Cette fonctionnalité pourrait être considérée comme une amélioration possible, car elle est vraiment pratique d'utilisation mais entraîne un gros travail supplémentaire.\\
+  Dans notre idée de départ, afin de ressembler à CodinGame, nous voulions que l'utilisateur soit en mesure de taper le code de son IA directement dans l'interface graphique. L'ajout d'une telle fonctionnalité dans Slick2D ne s'avère pas approprié. En effet, ceci complexifie le développement de l'interface et la gestion d'événements et ne permet pas de conserver la coloration syntaxique propre au langage utilisé. Cette fonctionnalité pourrait être considérée comme une amélioration possible, car elle est vraiment pratique d'utilisation mais entraîne un gros travail supplémentaire. \\
 
-Bien évidemment, l'interface graphique proposé peut être largement amélioré : apparence des boutons, modélisation du labyrinthe, mise à jour de la position des joueurs, etc..
+  Bien évidemment, l'interface graphique proposé peut être largement amélioré: apparence des boutons, modélisation du labyrinthe, mise à jour de la position des joueurs, etc.
