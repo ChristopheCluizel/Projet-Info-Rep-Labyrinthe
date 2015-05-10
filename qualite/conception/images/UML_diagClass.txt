@@ -1,71 +1,226 @@
 package "javabyrinthe"{
 
-class Partie{
-    - nbJoueurMax : int
-    - nbJoueur : int
-    - nbTourMax : int
-    - nbTour : int
+package "labyrinthe"{
+class Labyrinth{
+    - graph : Graph
+    - name : String
+    - width : int
+    - height : int
+    - departure : Coordinate
+    - arrival : Coordinate
     --
-    + tourSuivant() : void
-    + addJoueur(joueur : Joueur) : void
-    + getXJoueur(index : int) : int
-    + getYJoueur(index : int) : int
+    + toString() : String
+    + toStringForUser() : String
+    + getWidth() : int
+    + getHeight() : int
+    + getName() : String
+    + isAuthorizedMove(Coordinate departure, Coordinate arrival) : boolean
+    + getGraph() : Graph
+    + getSize() : Integer
+    + getDeparture() : Coordinate
+    + getArrival() : Coordinate
+    + setArrival(Coordinate arrival) : void
+    + getNextSquareFromOrder(String order, Coordinate actualPosition) : Coordinate
+}
+class LabyrinthGenerator{
+    --
+    + loadLabyrinth(String filePath) : Labyrinth
+    + keyToCoordinates(Integer key, Integer graphWidth) : Coordinate
+    + coordinatesToKey(Coordinate coordinate, Integer graphWidth) : Integer
+}
+}
+
+package "ihm"{
+
+class IHM{
+    - container : AppGameContainer
+    - mode : String
+    - pseudo : String
+    - action : String
+    -nbJoueurMax : int
+    --
+    + initStatesList(GameContainer container) : void
+    + getMode() : String
+    + getPseudo() : String
+    + getAction() : String
+    + getNbJoueurMax() : int
+    + setMode(String str) : void
+    + setPseudo(String str) : void
+    + setAction(String str) : void
+    + setNbJoueurMax(int i) : void
+}
+class Menu{
+    - ID : static final int
+    - gameContainer : GameContainer
+    - game : IHM
+    - ia : Button
+    - manuel : Button
+    - go1 : Button
+    - go2 : Button
+    - pseudo : TextField
+    - nbJoueur : TextField
+    - code : TextField
+    --
+    + getID() : int
+    + mousePressed(int button, int x, int y) : void
+    + keyReleased(int k,char c) : void
+    + enter(GameContainer container, StateBasedGame game) : void
+    + init(GameContainer container, StateBasedGame game) : void
+    + render(GameContainer container, StateBasedGame game, Graphics g) : void 
+    + update(GameContainer container, StateBasedGame game, int delta) : void
+    + verifierChamps() : boolean
+}
+class GameWindow{
+    - ID : static final int 
+    - container : GameContainer
+    - game : IHM
+    - tailleCaseInit : int
+    - tailleMurInit : int
+    - offsetInit : int
+    - l : Labyrinth
+    - stub : JoueurInterface
+    - selection : String
+    - etat : String
+    - couleur : ArrayList<Color> 
+    - menu : Button
+    --
+    + getId() : int
+    + recupererSelection() : String
+    + victoire() : void
+    + defaite() : void
+    + keyReleased(int k,char c) : void
+    + mousePressed(int button, int x, int y) : void
+    + enter(GameContainer container, StateBasedGame game) : void
+    + init(GameContainer container, StateBasedGame game) : void
+    + render(GameContainer container, StateBasedGame game, Graphics g) : void
+    + update(GameContainer container, StateBasedGame game, int delta) : void
+    + setSelection(String str) : void
+    + getSelection() : String
+    + creerPartie() : void
+    + rejoindrePartie() : void
+}
+class Button {
+    - coord : Coordinate
+    - height : int
+    - width : int 
+    - text : String
+    - selected : boolean
+    --
+    + isClicked(int x, int y) : boolean
+    + afficher(Graphics g) : void
+    + getX() : int
+    + getY() : int
+    + getHeight() : int
+    + getWidth() : int
+    + getText() : String
+    + getSelected() : boolean
+    + setSelected(boolean b) : void
+    + toString() : String
+}
+}
+
+package "jeu"{
+
+interface Partie{
+    --
+    + getLabyrinthe() : Labyrinth
+    + tourSuivant() : String
+    + addJoueur(JoueurInterface : Joueur) : void
     + getNbJoueurMax() : int
     + getNbJoueur() : int
     + getNbTourMax() : int
     + getNbTour() : int
+    + getJoueurs() : ArrayList<JoueurInterface> 
 }
-class Labyrinthe{
-    --
-    +isWall(x : int, y : int) : bool
 
-}
-class IHM{
-    - m_partie : Partie
+class PartieImpl{
+    - nbJoueurMax : int
+    - nbJoueur : int
+    - nbTourMax : int
+    - nbTour : int
+    - labyrinth : Labyrinth 
+    - joueurList : ArrayList<JoueurInterface>
     --
-    +getPartie() : Partie
-    +setPartie(partie : Partie) : void
-    +update() : void
+    + choisirLabyrinthe() : String
 }
-class Joueur{
+
+interface JoueurInterface {
+    + jouer() : String
+    + victoire() : void
+    + defaite() : void 
+    + setPseudo(String pseudo) : void 
+    + getPseudo() : String 
+    + getActualPosition() : Coordinate
+    + setActualPosition(Coordinate actualPosition) : void 
+    + setPartie(Partie partie) : void 
+    + getPartie() : Partie 
+    + setTour(boolean b) : void 
+    + getTour() : boolean 
+}
+abstract class Joueur{
     - pseudo : String
-    - x : int
-    - y : int
+    - actualPosition : Coordinate
+    - partieEnCours : Partie
+    - aTonTour : boolean
     --
-    +<i>jouer() : String</i>
 }
-class JoueurH{
+class JoueurHumain{
     --
-    +jouer() : String
 }
 class JoueurIA{
     --
-    +jouer() : String
+    + init() : void
+
 }
-class PartieManageur{
-    +creerPartie(client : String, nbJoueurMax : int) : Partie
-    +rejoindrePartie(client : String) : Partie
-}
-class PartieRunner{
-    +run() : void
+interface PartieManager{
+    + creerPartie(String clientId, String pseudo, String mode, int nbJoueurMax) : Partie
+    + rejoindrePartie(String clientId, String pseudo, String mode) : Partie
 }
 
+class PartieManagerImpl{
+    - partieList : ArrayList<Partie> 
+    - joueurIAList : HashMap<String, JoueurInterface>
+    - machine : String 
+    - port : int 
+    - registry : Registry   
+    --
+    + getJoueurFromIdClient(String stringIdClient) : JoueurInterface
+}
+
+class PartieRunner{
+    - partie : Partie
+    --
+    + lancerFinDePartie(String gagnant) : void
+    +run() : void
+}
+}
+
+package "rmi"{
 class Client{
     +main() : void
 }
 class Serveur{
     +main() : void
 }
-Joueur <|-- JoueurH
+}
+
+Joueur <|-- JoueurHumain
 Joueur <|-- JoueurIA
-Partie *-- Joueur : 0..n
-PartieManageur *-- Partie : 0..n
-PartieRunner <-down- PartieManageur
-PartieRunner o-- Partie : 1
-Serveur *-- PartieManageur : 1
+PartieImpl *-- Joueur : 0..n
+PartieManagerImpl *-- PartieImpl : 0..n
+PartieRunner <-down- PartieManagerImpl
+PartieRunner o-- PartieImpl : 1
+Serveur *-- PartieManagerImpl : 1
 Client *-- Joueur : 1
-IHM o-- Partie : 1
-Client o-- Partie : 1
+Menu o-- GameWindow : 1
+GameWindow o-- PartieImpl : 1
+Client o-- PartieImpl : 1
 Client *-- IHM : 1
-Partie *-- Labyrinthe : 1
+PartieImpl *-- Labyrinth : 1
+IHM o-- Menu : 1
+GameWindow o-- Button : 1
+LabyrinthGenerator o-- Labyrinth : 1
+Partie <|- PartieImpl
+JoueurInterface <|- Joueur
+PartieManager <|- PartieManagerImpl
 }
