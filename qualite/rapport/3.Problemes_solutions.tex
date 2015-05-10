@@ -20,3 +20,17 @@
 % =========== Interface ========
 \section{Interface}
     \TODO{Simon et Anthony}
+    \subsection{Récupération des informations de déplacement}
+        Lors de l'appel à la fonction \verb|jouer| d'un joueur humain, l'utilisateur doit saisir une touche directionnelle afin d'indiquer son déplacement. Cette fonction est bloquante, c'est-à-dire que tant que l'utilisateur n'a rien saisi, la fonction ne retourne rien et continue de tourner, bloquant le reste du thread. Le problème récontré est que les informations de saisis de touches sont des évènements générés dans la fenêtre, et le joueur n'a pas connaissance de cette fenêtre (il ne possède pas d'instance de la classe).
+
+        La solution apportée fut de créer un attribut statique qui contiendrait le déplacement du joueur, et de créer une fonction get statique dessus, permettant ainsi au joueur humain de récupérer l'information de saisie. La fonction statique est donc bloquante, initialise le déplacement comme une chaine vide, et attend que l'utilisateur saisisse une touche pour retourner le déplacement.
+
+    \subsection{Affichage des informations sur les joueurs}
+        Pour développer l'IHM, nous avions besoin d'afficher les informations sur les joueurs : leur pseudo et leur position sur la carte. Nous avons rencontré le problème suivant : lorsqu'un joueur rejoignait une partie, il possèdait toutes les informations relatives à cette partie ; toutefois, les autres joueurs ne recevait pas l'information qu'un nouveau joueur était connecté. Ainsi, le joueur qui créait la partie n'affichait que ses informations.
+
+        Ce problème est lié au stockage de l'objet \verb|partie| dans l'objet \verb|joueur|. Le joueur possède en effet un attribut \verb|partie|, ce qui permet à l'IHM d'afficher toutes les informations d'une partie en ayant connaissance que du joueur. Lors de l'ajout d'une partie à un joueur, une \emph{copie} de la partie était faite dans le joueur, et non une référence. Ainsi lorsque la partie (celle du serveur) était modifié, i.e. quand un joueur était ajouté, les parties des joueurs n'étaient pas modifiées en conséquence, et seul le dernier joueur a rejoindre la partie possède toutes les informations.
+
+        Pour résoudre ce problème, nous avons décidé de recopier la partie dans chaque joueur à chaque modification, permettant ainsi à chaque joueur de stocker une partie à jour.
+
+    \subsection{Non fonctionnement de la connexion du dernier joueur}
+    \TODO{Alexandre}
