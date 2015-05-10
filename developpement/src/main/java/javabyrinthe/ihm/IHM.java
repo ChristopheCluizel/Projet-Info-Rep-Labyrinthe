@@ -31,6 +31,7 @@ public class IHM extends StateBasedGame{
     public static void main(String[] args) throws SlickException{
         try{
             AppGameContainer container = new AppGameContainer(new IHM());
+            container.setAlwaysRender(true);
             container.setDisplayMode(600,600,false);
             container.setTargetFrameRate(60);
             container.setShowFPS(false);
