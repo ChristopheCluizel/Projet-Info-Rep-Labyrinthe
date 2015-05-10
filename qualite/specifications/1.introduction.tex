@@ -27,12 +27,15 @@
         De plus, un langage orienté objet est adapté à notre projet. Nous pourrions par exemple utiliser un objet Labyrinthe et un objet Joueur. Cela rendra le code ordonné et beaucoup plus compréhensible.
 
     \subsection{Communication client-serveur}
+        \color{red}
         L'échange d'information entre le serveur et les clients se fera à l'aide de \textbf{sockets}.
 
         Jusqu'à présent, les sockets sont le seul moyen que nous ayons étudié pour faire communiquer un serveur et un client.
 
         D'autre part, les sockets sont facilement utilisables en Java à l'aide du package java.net.
-
+        \color{green}
+        L'échange d'information entre le serveur et les clients se fera en RMI. Comme le serveur et les clients seront codés en Java, c'est la solution qui nous a semblé la plus simple à mettre en oeuvre.
+        \color{black}
     \subsection{Affichage}
         L'interface utilisateur sera réalisée à l'aide de la bibliothèque Java \textbf{Slick2D}. Après quelques recherches et en visualisant des exemples d'utilisation de différentes bibliothèques, il s'est avéré que la bibliothèque Slick2D correspond le mieux à nos attentes.
 

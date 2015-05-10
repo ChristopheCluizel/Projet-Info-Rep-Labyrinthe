@@ -3,11 +3,17 @@
 
 % ------------- Interface de l'écran d'accueil ------------
 \section{Interface de l'écran d'accueil}
-	Lorsque l'utilisateur lance le programme, celui-ci est dirigé vers un écran d'accueil. Cette écran est divisé en deux parties principales.
+	Lorsque l'utilisateur lance le programme, celui-ci est dirigé vers un écran d'accueil.
+
+	\color{red}
+	Cette écran est divisé en deux parties principales.
 
 	La première, à gauche, est la partie où l'utilisateur a la possibilité de développer sa propre Intelligence Artificielle (IA). L'utilisateur doit coder impérativement en Java sinon la compilation ne fonctionnera pas.
 
-	La deuxième, à droite, est la partie liée au jeu. Une description détaillée des règles du jeu figure en haut de l'écran afin que l'utilisateur novice puisse très vite prendre ses marques. Avant de créer ou rejoindre une partie, l'utilisateur doit renseigner un pseudo. Ce pseudo sera son identifiant lors des parties. De plus, il pourra choisir d'envoyer son IA, qu'il aura développé au préalable, dans le labyrinthe ou bien de jouer manuellement au jeu. Une fois que l'utilisateur aura rentré ces paramètres, il peut choisir de rejoindre une partie ou d'en créer une. S'il choisit d'en créer une il devra renseigner le nombre maximum de joueurs que la partie pourra accueillir.
+	La deuxième, à droite, est la partie liée au jeu. Une description détaillée des règles du jeu figure en haut de l'écran afin que l'utilisateur novice puisse très vite prendre ses marques.
+
+	\color{black}
+	Avant de créer ou rejoindre une partie, l'utilisateur doit renseigner un pseudo. Ce pseudo sera son identifiant lors des parties. De plus, il pourra choisir d'envoyer son IA, qu'il aura développé au préalable, dans le labyrinthe ou bien de jouer manuellement au jeu. Une fois que l'utilisateur aura rentré ces paramètres, il peut choisir de rejoindre une partie ou d'en créer une. S'il choisit d'en créer une il devra renseigner le nombre maximum de joueurs que la partie pourra accueillir.
 
 	Le choit de jouer avec une IA ou manuellement se fera à l'aide de radios boutons qui mettra en surbrillance le choix de l'utilisateur.
 
@@ -36,7 +42,9 @@
 	\begin{itemize}
 		\item L'écran de jeu: c'est dans cette partie qu'est affiché le labyrinthe, on peut suivre sur cet écran les déplacements des joueurs, chaque joueur étant représenté par une couleur;
 		\item La liste des joueurs: cette partie montre la liste des joueurs et la couleur associé à chacun des joueurs, le joueur dont c'est le tour est également mis en évidence dans cette partie;
+		\color{red}
 		\item La console d'information: les informations, qui décrivent le dernier tour joué, s'affichent dans cette console, la console affiche donc un descriptif de tous les tours joués jusqu'à lors.
+		\color{black}
 	\end{itemize}
 	\begin{figure}[h]
 		\centering
@@ -52,7 +60,7 @@
 
 	% ------------- Déplacement humain ------------
 	\subsubsection*{Déplacement humain}
-	Lorsqu'un joueur joue sans IA, il dispose d'un temps supérieur pour indiquer son déplacement. Il indique son déplacement à l'aide des touches fléchées. Dans le cas où le joueur ne veut pas se déplacer, il peut appuyer sur la touche espace pour passer son tour. Dans le cas où il n'appuie sur aucune touche avant la fin du temps imparti, il ne se déplace pas. Dans le cas où son déplacement n'est pas valide, par exemple si la destination est un mur, il ne se déplace pas non plus.
+	Lorsqu'un joueur joue sans IA, il dispose d'un temps supérieur pour indiquer son déplacement. Il indique son déplacement à l'aide des touches fléchées. \color{red}Dans le cas où le joueur ne veut pas se déplacer, il peut appuyer sur la touche espace pour passer son tour.\color{black} Dans le cas où il n'appuie sur aucune touche avant la fin du temps imparti, il ne se déplace pas. Dans le cas où son déplacement n'est pas valide, par exemple si la destination est un mur, il ne se déplace pas non plus.
 
 	% ------------- Déplacement avec une IA ------------
 	\subsubsection*{Déplacement avec une IA}

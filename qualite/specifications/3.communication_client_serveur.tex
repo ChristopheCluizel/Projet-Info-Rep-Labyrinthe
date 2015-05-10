@@ -1,19 +1,22 @@
 % ============= Communication client-serveur, serveur-client ===============
 \chapter{Communication client-serveur, serveur-client}
-    Comme précisé dans la partie~\ref{sec:principales_technologies}, la communication sera effectuée à l'aide de sockets.
+    Comme précisé dans la partie~\ref{sec:principales_technologies}, la communication sera effectuée à l'aide de \color{red}sockets \color{green}RMI\color{black}.
 
 
     %============== Communication client-serveur ===================
     \section{Communication client-serveur}
         Lorsque l'utilisateur appuiera sur le bouton \emph{GO}, l'application cliente se connectera au serveur. Celui si aura une ip publique/fixe afin d'être joignable en permanence.\\
-
+\color{red}
         Si l'utilisateur choisit de jouer à l'aide d'une IA, son programme sera envoyé au serveur pour que celui-ci le compile et l'exécute. Une fois la partie commencée, la communication client-serveur dépend du mode de jeu choisi.
-
+\color{black}
         \paragraph{Mode manuel} Le client communiquera au serveur uniquement les ordres de déplacement entrés à l'aide des touches clavier sous la forme décrite dans la partie~\ref{subsec:gestion_deplacements}.
 
-        \paragraph{Mode IA} Le client ne communiquera aucune information au serveur, puisque l'IA de l'utilisateur s'exécutera sur le serveur lui-même. \\
+        \paragraph{Mode IA} \color{red}Le client ne communiquera aucune information au serveur, puisque l'IA de l'utilisateur s'exécutera sur le serveur lui-même. \color{green} Le client communiquera au serveur de la même manière quand mode manuel, en executant le code de l'IA de son côté.\\
 
+\color{red}
         \emph{Remarque: il a été décidé de compiler et d'exécuter l'IA des utilisateurs sur le serveur afin d'éviter que celui-ci ne doive installer l'environnement nécessaire à la compilation et l'exécution.}
+\color{black}
+        \emph{Remarque : il a été décidé de compiler et d'exécuter l'IA des utilisateurs sur le client pour des commodités de développement.}
 
 
     %============== Communication serveur-client ===================
