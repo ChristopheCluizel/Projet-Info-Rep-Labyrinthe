@@ -59,12 +59,20 @@ public class JoueurIA extends Joueur {
 			System.out.println("L'IA ne tourne pas.");
 			return "";
 		}
+		try{
+			int exitValue = processusAssocie.exitValue();
+			System.out.println("L'IA s'est terminé avec le code d'erreur " + exitValue);
+			return "";
+		}catch(IllegalThreadStateException e)
+		{
+			System.out.println("L'IA joue encore");
+		}
 		System.out.println("A l'IA de jouer. Sa position actuelle : " + actualPosition.toString());
 		String reponse = "";
 		try {
-			Thread.sleep(100);
+			
 			streamEnvoi.flush();
-			streamEnvoi.write(partieEnCours.getLabyrinthe().toString());
+			streamEnvoi.write("hello\r\n");//partieEnCours.getLabyrinthe().toString());
 			// // on envoie les paramètres
 			// nécessaires pour exécuter la
 			// méthode choisirDirection écrite
@@ -72,6 +80,7 @@ public class JoueurIA extends Joueur {
 			streamEnvoi.newLine();
 			streamEnvoi.flush();
 			System.out.println("Attente de réponse...");
+			Thread.sleep(100);
 			reponse = streamReponse.readLine();
 			if (reponse == null)
 				reponse = "";

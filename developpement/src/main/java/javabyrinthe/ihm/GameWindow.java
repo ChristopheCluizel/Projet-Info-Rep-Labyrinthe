@@ -96,7 +96,7 @@ public class GameWindow extends BasicGameState{
  	public void mousePressed(int button, int x, int y){
  		//System.out.println("("+x+","+y+")");
  		
- 		if(menu.isClicked(x,y)){
+ 		if(menu.isClicked(x,y) && etat!="enCours"){
  			game.enterState(1);
  			System.out.println("Retour au menu");
  			}
@@ -111,11 +111,18 @@ public class GameWindow extends BasicGameState{
  			rejoindrePartie();
  		else if(this.game.getAction().equals("creer"))
  			creerPartie();
+
  		try{
+ 			if(stub.getPartie()==null)
+	 		{
+				game.enterState(1);
+				return;
+			}
  			l = stub.getPartie().getLabyrinthe();
  		}catch(Exception e){
  			e.printStackTrace();
  		}
+ 		System.out.println("Entered in the game");
  	}
 
  	@Override
@@ -137,6 +144,12 @@ public class GameWindow extends BasicGameState{
 
  	@Override
  	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+ 		try{
+	 		if(stub.getPartie()==null)
+	 			return;
+ 		}catch(Exception e){
+ 			e.printStackTrace();
+ 		}
  		g.drawImage(new Image("src/main/resources/backgroundJeux.png"),0,0);
  		//affichage du labyrinthe
  		int nbCases = l.getSize()*l.getSize();
@@ -186,7 +199,11 @@ public class GameWindow extends BasicGameState{
  				g.drawString("Vous avez perdu...",250,420);
  				menu.afficher(g);
  			}
-
+ 			try{
+ 				g.drawString("Tour "+stub.getPartie().getnbTour()+"/"+stub.getPartie().getnbTourMax(),300,380);
+ 			}catch(Exception e){
+ 				e.printStackTrace();
+ 			}
  			//affichage des joueurs
  			ArrayList<JoueurInterface> joueurs = stub.getPartie().getJoueurs();
  			for(int i=0 ; i<joueurs.size() ; i++){
@@ -277,7 +294,6 @@ public class GameWindow extends BasicGameState{
 			// recupération du partie manager et entrée dans une parite
 			PartieManager partieManager = (PartieManager) registry.lookup("PartieManager");
 			Partie partie;
-
 			if (game.getMode().equals("humain")) {
 				partie = partieManager.rejoindrePartie(stringIdClient, game.getPseudo(), "humain");
 			} else {
