@@ -4,5 +4,15 @@
     \begin{frame}
         \frametitle{Problèmes \& solutions}
 
-
+        \begin{itemize} 
+		 \item \textbf{Logique métier}
+		 	\begin{itemize}
+		 		\item RMI : Gestion client-serveur => double gestion de stub;
+		 		\item Compilation et exécution depuis le code source : Exécution et compilation de l'IA sur le serveur => exécution et compilation sur le client.
+		 	\end{itemize}
+		\item \textbf{Interface}
+			\begin{itemize}
+				\item Récupération du choix de direction du joueur humain : Besoin d'une méthode bloquante => Utilisation d'un Thread afin d'attendre que l'utilisateur appuie sur une touche de direction.
+			\end{itemize}
+		\end{itemize}
     \end{frame}
