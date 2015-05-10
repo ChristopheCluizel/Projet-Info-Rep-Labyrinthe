@@ -183,7 +183,7 @@ public class GameWindow extends BasicGameState{
  		//selection
  		try{
  			g.setColor(Color.white);
- 			if(stub.getTour()){
+ 			if(stub.getTour() && etat=="enCours"){
   				g.drawString("C'est à votre tour !",300,420);
  				g.drawString("Deplacement : "+selection,300,450);
  			}else if (etat=="enCours"){
