@@ -45,7 +45,8 @@ public class PartieManagerImpl implements PartieManager, Remote {
     			System.out.println();
 				System.out.println("########### Partie lancée ############");
     			PartieRunner partieRunner = new PartieRunner(nouvellePartie);
-    			partieRunner.run();
+    			Thread t1 = new Thread(partieRunner);
+        		t1.start();
     		}
 			return nouvellePartie;
 		} catch (Exception e) {
@@ -69,7 +70,8 @@ public class PartieManagerImpl implements PartieManager, Remote {
 	        			System.out.println();
 						System.out.println("########### Partie lancée ############");
 	        			PartieRunner partieRunner = new PartieRunner(partie);
-	        			partieRunner.run();
+	        			Thread t1 = new Thread(partieRunner);
+        				t1.start();
 	        		}
 	        		break;
 	        	}

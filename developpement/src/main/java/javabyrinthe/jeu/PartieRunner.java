@@ -47,10 +47,14 @@ public class PartieRunner implements  Runnable {
 					lancerFinDePartie(gagnant);
 					break;
 				}
+				for(JoueurInterface j : partie.getJoueurs())
+					j.setPartie(partie);
 			}catch(Exception e){
 				System.out.println("/!\\PartieRunner : " + e);
 			}
 		}
+		if(partie.getnbTour() >= partie.getnbTourMax())
+			lancerFinDePartie("");
 		System.out.println("Fin de partie" + partie);
 	}
 }
