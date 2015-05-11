@@ -15,11 +15,9 @@
 
 		Le plus simple aurait été de demander à l'utilisateur du programme de coder entièrement un fichier JoueurIA.java contenant les méthodes adéquates et de le compiler à la main. Notre programme n'aurait plus qu'à instancier cet objet. Afin de ne pas perdre le travail déjà effectué précédemment sur les processus, nous sommes parvenus à un état intermédiaire où notre programme compile et exécute automatiquement sur le client le code de l'IA récupéré dans le fichier \texttt{MainJoueur.java}.
 
-\TODO{Christophe, Alexandre, Charlotte/Céline}
 
 % =========== Interface ========
 \section{Interface}
-    \TODO{Simon et Anthony}
     \subsection{Récupération des informations de déplacement}
         Lors de l'appel à la fonction \verb|jouer| d'un joueur humain, l'utilisateur doit saisir une touche directionnelle afin d'indiquer son déplacement. Cette fonction est bloquante, c'est-à-dire que tant que l'utilisateur n'a rien saisi, la fonction ne retourne rien et continue de tourner, bloquant le reste du thread. Le problème récontré est que les informations de saisis de touches sont des évènements générés dans la fenêtre, et le joueur n'a pas connaissance de cette fenêtre (il ne possède pas d'instance de la classe).
 
@@ -31,6 +29,3 @@
         Ce problème est lié au stockage de l'objet \verb|partie| dans l'objet \verb|joueur|. Le joueur possède en effet un attribut \verb|partie|, ce qui permet à l'IHM d'afficher toutes les informations d'une partie en ayant connaissance que du joueur. Lors de l'ajout d'une partie à un joueur, une \emph{copie} de la partie était faite dans le joueur, et non une référence. Ainsi lorsque la partie (celle du serveur) était modifié, i.e. quand un joueur était ajouté, les parties des joueurs n'étaient pas modifiées en conséquence, et seul le dernier joueur a rejoindre la partie possède toutes les informations.
 
         Pour résoudre ce problème, nous avons décidé de recopier la partie dans chaque joueur à chaque modification, permettant ainsi à chaque joueur de stocker une partie à jour.
-
-    \subsection{Non fonctionnement de la connexion du dernier joueur}
-    \TODO{Alexandre}
