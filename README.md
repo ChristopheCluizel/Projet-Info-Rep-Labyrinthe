@@ -7,6 +7,10 @@ L'objectif de ce projet est de mettre en pratique les notions vues en cours d'In
 - la communication entre les clients et le serveur sera effectuée à l'aide de `RMI` ;
 - l'interface utilisateur sera réalisée à l'aide de la bibliothèque `Slick2D`.
 
+## Compilation
+
+Pour compiler notre projet, se placer dans le dossier `developpement` et lancer dans un terminal la commande `./compile.sh`.
+
 ## Exécution
 
 1. se placer dans le dossier `developpement`.
