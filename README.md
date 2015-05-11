@@ -9,10 +9,9 @@ L'objectif de ce projet est de mettre en pratique les notions vues en cours d'In
 
 ## Exécution
 
-Pour exécuter `rmiregistry`, le `serveur` et le `client`, il faut préalablement déplacer un certain nombre de fichiers `.class`. Mettre tous les .class des dossiers jeu/, labyrinthe/ et tools/ dans les dossiers `client`, `rmiregistry` et `serveur`. Le script `moveFiles.sh` fait cela automatiquement.
+1. se placer dans le dossier `developpement`.
+2. lancer le `rmiregistry` à l'aide la commande `./runRMIRegistry.sh` dans un premier terminal
+3. dans un second terminal, lancer le serveur avec `./runServeur.sh`
+4. puis pour chaque nouveau joueur lancer le jeu, dans un nouveau terminal, à l'aide de `./runIhm.sh` (linux) ou `./runIhmOSX.sh` (Mac)
 
-Ensuite se placer dans le dossier `classes` et lancer dans un terminal différent : 
-
-- `rmiregistry`
-- `java serveur.Serveur`
-- `java client.Client` avec l'option `R` (rejoindre) ou `C` (créer) et l'option `H` (joueur humain) ou `I` (joueur IA)
+Pour utiliser l'interface, se référer si besoin à la vidéo de démonstration dans le dossier `qualité/video_demo/demonstration.mov` du dossier parent.
