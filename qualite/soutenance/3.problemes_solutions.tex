@@ -4,16 +4,16 @@
     \begin{frame}
         \frametitle{Problèmes \& solutions}
 
-        \begin{itemize} 
+        \begin{itemize}
 		 \item \textbf{Logique métier}
 		 	\begin{itemize}
-		 		\item RMI : Gestion client-serveur => double gestion de stub;
-		 		\item Compilation et exécution depuis le code source : Exécution et compilation de l'IA sur le serveur => exécution et compilation sur le client.
+		 		\item RMI : Gestion client-serveur => double gestion de stub
+		 		\item Compilation et exécution depuis le code source : Exécution et compilation de l'IA sur le serveur => exécution et compilation sur le client
 		 	\end{itemize}
 		\item \textbf{Interface}
 			\begin{itemize}
-				\item Récupération du choix de direction du joueur humain : Besoin de pouvoir récupérer l'entrée de la fenêtre dans la fonction jouer du joueur => Utilisation d'une fonction statique bloquante afin d'attendre que l'utilisateur appuie sur une touche de direction.
-				\item Affichage des informations des joueurs sur la fenêtre :  Les nouveaux joueurs ont accès aux informations des joueurs déjà présents mais pas l'inverse => à chaque ajout d'un nouveau joueur on met à jour la partie pour les anciens joueurs.
+				\item Récupération du choix de direction du joueur humain : Besoin de pouvoir récupérer l'entrée de la fenêtre dans la fonction jouer du joueur => Utilisation d'une fonction statique bloquante afin d'attendre que l'utilisateur appuie sur une touche de direction
+				\item Affichage des informations des joueurs sur la fenêtre :  Les nouveaux joueurs ont accès aux informations des joueurs déjà présents mais pas l'inverse => à chaque ajout d'un nouveau joueur on met à jour la partie pour les anciens joueurs
 			\end{itemize}
 		\end{itemize}
     \end{frame}
